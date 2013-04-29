@@ -260,6 +260,65 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 
+-- -----------------------------------------------------
+-- Table `mydb`.`TIPO_TAREA`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `mydb`.`TIPO_TAREA` (
+  `id` INT(11) NOT NULL ,
+  `nombre` VARCHAR(100) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`TAREA`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `mydb`.`TAREA` (
+  `id_tarea` INT(11) NOT NULL ,
+  `tipo_tarea` INT(11) NULL DEFAULT NULL ,
+  `dni` VARCHAR(9) NULL DEFAULT NULL ,
+  `dni_tarea_asignado` VARCHAR(9) NULL DEFAULT NULL ,
+  `fecha_emision` DATE NULL DEFAULT NULL ,
+  `codigo_perfil` INT(11) NULL DEFAULT NULL ,
+  `codigo_categoria` INT(11) NULL DEFAULT NULL ,
+  `codigo_numero` INT(11) NULL DEFAULT NULL ,
+  `codigo_terminal` INT(11) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id_tarea`) ,
+  INDEX `dni` (`dni` ASC) ,
+  INDEX `dni_tarea_asignado` (`dni_tarea_asignado` ASC) ,
+  INDEX `codigo_perfil` (`codigo_perfil` ASC) ,
+  INDEX `codigo_categoria` (`codigo_categoria` ASC) ,
+  INDEX `codigo_numero` (`codigo_numero` ASC) ,
+  INDEX `codigo_terminal` (`codigo_terminal` ASC) ,
+  INDEX `tipo_tarea` (`tipo_tarea` ASC) ,
+  CONSTRAINT `tarea_ibfk_7`
+    FOREIGN KEY (`tipo_tarea` )
+    REFERENCES `mydb`.`TIPO_TAREA` (`id` ),
+  CONSTRAINT `tarea_ibfk_1`
+    FOREIGN KEY (`dni` )
+    REFERENCES `mydb`.`USUARIO` (`dni` ),
+  CONSTRAINT `tarea_ibfk_2`
+    FOREIGN KEY (`dni_tarea_asignado` )
+    REFERENCES `mydb`.`USUARIO` (`dni` ),
+  CONSTRAINT `tarea_ibfk_3`
+    FOREIGN KEY (`codigo_perfil` )
+    REFERENCES `mydb`.`PERFIL` (`codigo` ),
+  CONSTRAINT `tarea_ibfk_4`
+    FOREIGN KEY (`codigo_categoria` )
+    REFERENCES `mydb`.`CATEGORIA` (`codigo` ),
+  CONSTRAINT `tarea_ibfk_5`
+    FOREIGN KEY (`codigo_numero` )
+    REFERENCES `mydb`.`LINEA` (`codigo` ),
+  CONSTRAINT `tarea_ibfk_6`
+    FOREIGN KEY (`codigo_terminal` )
+    REFERENCES `mydb`.`TERMINAL` (`codigo` ))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1
+COLLATE = latin1_swedish_ci;
+
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

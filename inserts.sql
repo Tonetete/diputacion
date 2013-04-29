@@ -177,4 +177,9 @@ INSERT INTO USUARIO(dni,nombre,apellidos,email,codigo_rescate,codigo_dip,codigo_
 ('93164374E','María Teresa','Vázquez Álvarez','mvazquezalvarez@gmail.com',4,8,3) ,
 ('87404617V','María Carmen','Casanova Soriano','mcasanovasoriano@gmail.com',5,8,4);
 
+INSERT INTO TIPO_TAREA(id,nombre) VALUES
+(1,"TARIFA"),
+(2,"SOLICITAR TERMINAL FIJO"),
+(3,"SOLICITAR TERMINAL MOVIL");
+
 
