@@ -275,7 +275,7 @@ COLLATE = latin1_swedish_ci;
 -- -----------------------------------------------------
 -- Table `mydb`.`TAREA`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mydb`.`tarea` (
+CREATE  TABLE IF NOT EXISTS `mydb`.`TAREA` (
   `id_tarea` INT(11) NOT NULL ,
   `tipo_tarea` INT(11) NULL DEFAULT NULL ,
   `dni` VARCHAR(9) NULL DEFAULT NULL ,

@@ -108,7 +108,7 @@ INSERT INTO TERMINAL(codigo,fecha_alta,fecha_baja,marca,modelo,configuracion,sn,
 
 
 INSERT INTO LINEA (codigo,numero,periodo_facturacion,publico) VALUES
-(1,657770878,'2013-01-01 00:00:00','Y') ,
+(1,657770818,'2013-01-01 00:00:00','Y') ,
 (2,696993301,'2013-01-01 00:00:00','Y') ,
 (3,629620754,'2013-01-01 00:00:00','Y') ,
 (4,654320357,'2013-01-01 00:00:00','Y') ,
@@ -129,7 +129,7 @@ INSERT INTO LINEA (codigo,numero,periodo_facturacion,publico) VALUES
 (19,606831597,'2013-01-01 00:00:00','Y') ,
 (20,684207229,'2013-01-01 00:00:00','Y') ,
 (21,657770878,'2013-01-01 00:00:00','Y') ,
-(22,657770978,'2013-01-01 00:00:00','Y') ,
+(22,657770979,'2013-01-01 00:00:00','Y') ,
 (23,655883563,'2013-01-01 00:00:00','Y') ,
 (24,606557088,'2013-01-01 00:00:00','Y') ,
 (25,634310475,'2013-01-01 00:00:00','Y') ,
@@ -180,7 +180,7 @@ INSERT INTO USUARIO(dni,nombre,apellidos,email,codigo_rescate,codigo_dip,codigo_
 INSERT INTO TIPO_TAREA(id,nombre) VALUES
 (1,"TARIFA"),
 (2,"SOLICITAR TERMINAL FIJO"),
-(3,"SOLICITAR TERMINAL MOVIL");
+(3,"SOLICITAR TERMINAL MOVIL"),
 (4,"SOLICITAR LINEA"),
 (5,"CATEGORIA");
 
