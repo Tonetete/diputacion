@@ -275,7 +275,7 @@ COLLATE = latin1_swedish_ci;
 -- -----------------------------------------------------
 -- Table `mydb`.`TAREA`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mydb`.`TAREA` (
+CREATE  TABLE IF NOT EXISTS `mydb`.`tarea` (
   `id_tarea` INT(11) NOT NULL ,
   `tipo_tarea` INT(11) NULL DEFAULT NULL ,
   `dni` VARCHAR(9) NULL DEFAULT NULL ,
@@ -285,6 +285,7 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`TAREA` (
   `codigo_categoria` INT(11) NULL DEFAULT NULL ,
   `codigo_numero` INT(11) NULL DEFAULT NULL ,
   `codigo_terminal` INT(11) NULL DEFAULT NULL ,
+  `validado` CHAR(1) NULL DEFAULT 'N' ,
   PRIMARY KEY (`id_tarea`) ,
   INDEX `dni` (`dni` ASC) ,
   INDEX `dni_tarea_asignado` (`dni_tarea_asignado` ASC) ,
@@ -293,9 +294,6 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`TAREA` (
   INDEX `codigo_numero` (`codigo_numero` ASC) ,
   INDEX `codigo_terminal` (`codigo_terminal` ASC) ,
   INDEX `tipo_tarea` (`tipo_tarea` ASC) ,
-  CONSTRAINT `tarea_ibfk_7`
-    FOREIGN KEY (`tipo_tarea` )
-    REFERENCES `mydb`.`TIPO_TAREA` (`id` ),
   CONSTRAINT `tarea_ibfk_1`
     FOREIGN KEY (`dni` )
     REFERENCES `mydb`.`USUARIO` (`dni` ),
@@ -313,7 +311,10 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`TAREA` (
     REFERENCES `mydb`.`LINEA` (`codigo` ),
   CONSTRAINT `tarea_ibfk_6`
     FOREIGN KEY (`codigo_terminal` )
-    REFERENCES `mydb`.`TERMINAL` (`codigo` ))
+    REFERENCES `mydb`.`TERMINAL` (`codigo` ),
+  CONSTRAINT `tarea_ibfk_7`
+    FOREIGN KEY (`tipo_tarea` )
+    REFERENCES `mydb`.`TIPO_TAREA` (`id` ))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 COLLATE = latin1_swedish_ci;
