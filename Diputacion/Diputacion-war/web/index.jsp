@@ -12,7 +12,10 @@
         <title>Facturación</title>
     </head>
     <body>
-        <h1>Hola Mundito Amiguitos!!</h1>
+        <form name="send" method="POST" action="listmovil">
+            <input type="text" name="dni">
+            <input type="submit" name="submit" value="ENVIAR DNI">  
+        </form>
         
     </body>
 </html>

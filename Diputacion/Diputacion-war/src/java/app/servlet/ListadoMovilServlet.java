@@ -4,10 +4,14 @@
  */
 package app.servlet;
 
+import app.dao.AsignacionFijoFacade;
 import app.dao.LlamadaFacade;
 import app.dao.LineaFacade;
+import app.dao.UsuarioFacade;
+import app.entity.AsignacionFijo;
 import app.entity.Linea;
 import app.entity.Llamada;
+import app.entity.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -27,11 +31,12 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author guzman
  */
-@WebServlet(name = "FacturacionServlet", urlPatterns = {"/llamadas"})
-public class FacturacionServlet extends HttpServlet {
+@WebServlet(name = "ListadoMovilServlet", urlPatterns = {"/listmovil"})
+public class ListadoMovilServlet extends HttpServlet {
     @EJB
-    private LineaFacade lineaFacade;
-    
+    private AsignacionFijoFacade asigFijoFacade;
+    @EJB
+    private UsuarioFacade userFacade;
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -41,11 +46,23 @@ public class FacturacionServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Linea> listaLineas = lineaFacade.findAll();
         
-        request.setAttribute("listaLineas", listaLineas);
+        List<AsignacionFijo> listaAsignaciones = asigFijoFacade.findAll();
+        List<Usuario> listaUsuarios = userFacade.findAll();
+       
+        String dni = request.getParameter("dni");
+        Usuario user = null;
+        for(Usuario u : listaUsuarios)
+        {
+            if(u.getDni().equals(dni))
+                user = u;
+        }
+        
+        request.setAttribute("listaAsignaciones", listaAsignaciones);
+        request.setAttribute("usuario", user);
+        
         RequestDispatcher rd;
-        rd = this.getServletContext().getRequestDispatcher("/llamadas.jsp");
+        rd = this.getServletContext().getRequestDispatcher("/listmovil.jsp");
         rd.forward(request, response);
     }
 
