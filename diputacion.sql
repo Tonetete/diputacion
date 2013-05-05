@@ -193,13 +193,16 @@ DEFAULT CHARACTER SET = latin1;
 -- Table `mydb`.`LLAMADA`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `mydb`.`LLAMADA` (
+  `codigo` BIGINT NOT NULL AUTO_INCREMENT,
+  `codigo_numero` INT(11) NOT NULL ,  
   `numero_destino` VARCHAR(40) NOT NULL ,
+  `inicio` DATE,
+  `fin` DATE,
   `tipo` VARCHAR(40) NULL DEFAULT NULL ,
   `duracion` INT NOT NULL ,
-  `coste` DECIMAL(10,0) NOT NULL ,
-  `codigo_numero` INT(11) NOT NULL ,
-  PRIMARY KEY (`codigo_numero`) ,
-  CONSTRAINT `fk_9228D15F-0E19-43D3-99FC-EDCF2EBC67C3`
+  `coste` DECIMAL(10,3) NOT NULL , 
+  PRIMARY KEY (`codigo`) ,
+  CONSTRAINT `fk_LLAMADA_LINEA`
     FOREIGN KEY (`codigo_numero` )
     REFERENCES `mydb`.`LINEA` (`codigo` ))
 ENGINE = InnoDB

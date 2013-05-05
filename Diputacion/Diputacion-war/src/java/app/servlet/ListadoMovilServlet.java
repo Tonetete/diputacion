@@ -4,25 +4,22 @@
  */
 package app.servlet;
 
+import app.dao.AsignacionFijoFacade;
 import app.dao.LlamadaFacade;
-<<<<<<< HEAD
-=======
 import app.dao.LineaFacade;
+import app.dao.UsuarioFacade;
+import app.entity.AsignacionFijo;
 import app.entity.Linea;
->>>>>>> Versión 1º Definitva (eh o no?)
 import app.entity.Llamada;
+import app.entity.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-<<<<<<< HEAD
-import javax.ejb.EJB;
-=======
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
->>>>>>> Versión 1º Definitva (eh o no?)
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,19 +31,12 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author guzman
  */
-<<<<<<< HEAD
-@WebServlet(name = "NewServlet", urlPatterns = {"/NewServlet"})
-public class FacturacionServlet extends HttpServlet {
+@WebServlet(name = "ListadoMovilServlet", urlPatterns = {"/listmovil"})
+public class ListadoMovilServlet extends HttpServlet {
     @EJB
-    private LlamadaFacade llamadaFacade;
-=======
-@WebServlet(name = "FacturacionServlet", urlPatterns = {"/llamadas"})
-public class FacturacionServlet extends HttpServlet {
-    
-    private LlamadaFacade llamadaFacade;
-    private LineaFacade lineaFacade;
->>>>>>> Versión 1º Definitva (eh o no?)
-
+    private AsignacionFijoFacade asigFijoFacade;
+    @EJB
+    private UsuarioFacade userFacade;
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -56,36 +46,24 @@ public class FacturacionServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-<<<<<<< HEAD
         
-//        List<Customer> listClientes = customerFacade.findAll();
-//        request.setAttribute("listaClientes", listClientes);
-//        RequestDispatcher rd;
-//        
-//        rd = this.getServletContext().getRequestDispatcher("/salida.jsp");
-//        rd.forward(request, response);
-//        
-        List<Llamada> listaLlamadas = llamadaFacade.findAll();
-        request.setAttribute("listaLlamadas", listaLlamadas);
-        RequestDispatcher rd;
-        rd = this.getServletContext().getRequestDispatcher("/index.jsp");
-=======
-        try {
-             lineaFacade = (LineaFacade)InitialContext.doLookup("java:global/Diputacion/Diputacion-ejb/LineaFacade!app.dao.LineaFacade");
-        } catch (NamingException ex) {
-            Logger.getLogger(FacturacionServlet.class.getName()).log(Level.SEVERE, null, ex);
+        List<AsignacionFijo> listaAsignaciones = asigFijoFacade.findAll();
+        List<Usuario> listaUsuarios = userFacade.findAll();
+       
+        String dni = request.getParameter("dni");
+        Usuario user = null;
+        for(Usuario u : listaUsuarios)
+        {
+            if(u.getDni().equals(dni))
+                user = u;
         }
         
-        List<Linea> listaLineas = lineaFacade.findAll();        
-        //request.setAttribute("listaLlamadas", listaLlamadas);
-        request.setAttribute("listaLineas", listaLineas);
+        request.setAttribute("listaAsignaciones", listaAsignaciones);
+        request.setAttribute("usuario", user);
+        
         RequestDispatcher rd;
-        rd = this.getServletContext().getRequestDispatcher("/llamadas.jsp");
->>>>>>> Versión 1º Definitva (eh o no?)
+        rd = this.getServletContext().getRequestDispatcher("/listmovil.jsp");
         rd.forward(request, response);
-
-        
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
