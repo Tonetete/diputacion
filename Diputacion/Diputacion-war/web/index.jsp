@@ -17,5 +17,10 @@
             <input type="submit" name="submit" value="ENVIAR DNI">  
         </form>
         
+        <form name="send" method="POST" action="FacturacionLinea">
+            N&uacute;mero: <input type="text" name="linea">
+            <input type="submit" name="submit" value="Ver Facturacion">  
+        </form>
+        
     </body>
 </html>

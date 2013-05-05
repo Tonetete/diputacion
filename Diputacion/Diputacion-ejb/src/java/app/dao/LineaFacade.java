@@ -27,4 +27,9 @@ public class LineaFacade extends AbstractFacade<Linea> {
         super(Linea.class);
     }
     
+    public Linea findByNumero(String numero) {
+        return (Linea) em.createNamedQuery("Linea.findByNumero")
+                .setParameter("numero", numero)
+                .getSingleResult();
+    }
 }

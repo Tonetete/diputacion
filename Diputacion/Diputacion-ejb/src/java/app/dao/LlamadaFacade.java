@@ -4,7 +4,9 @@
  */
 package app.dao;
 
+import app.entity.Linea;
 import app.entity.Llamada;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,6 +27,12 @@ public class LlamadaFacade extends AbstractFacade<Llamada> {
 
     public LlamadaFacade() {
         super(Llamada.class);
+    }
+
+    public List<Llamada> findByLinea(Linea linea) {
+        return em.createNamedQuery("Llamada.findByCodigoNumero")
+                .setParameter("codigoNumero", linea.getCodigo())
+                .getResultList();
     }
     
 }
