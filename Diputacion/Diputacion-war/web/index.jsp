@@ -7,10 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Facturación</title>
-    </head>
+    <jsp:include page="res/header.jsp"/>
     <body>
         <form name="send" method="POST" action="http://localhost:8080/Diputacion-war/listmovil">
             <input type="text" name="dni">

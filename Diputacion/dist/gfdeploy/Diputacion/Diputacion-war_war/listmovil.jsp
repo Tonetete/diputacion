@@ -13,10 +13,7 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Diputación - LINEAS</title>
-    </head>
+    <jsp:include page="res/header.jsp"/>
     <body>
         <%
             Usuario usuarioLogueado = (Usuario) request.getAttribute("usuario");
@@ -28,7 +25,7 @@
                 if(usuarioLogueado.getCodigoRol().getCodigo()==4)
                 {       //panel de usuarios
                      out.print("<FORM ACTION='llamadas' METHOD='post' name='form1' id='form1'>");
-                     out.print("<table border='1'>");
+                     out.print("<table class='table table-striped'>");
                         out.print("<tr>"
                                 + "<td>Numero de linea</td>"
                             + "<td>Seleccion</td>"
@@ -55,7 +52,7 @@
                 else if(usuarioLogueado.getCodigoRol().getCodigo()==1) //ADMINISTRADOR
                 {
                     out.print("<FORM ACTION='llamadas' METHOD='post' name='form1' id='form1'>");
-                    out.print("<table border='1'>");
+                    out.print("<table class='table table-striped'>");
                     out.print("<tr><td>Numero de linea</td>"
                             + "<td>Usuario</td>"
                             + "<td>Departamento</td>"
@@ -85,7 +82,7 @@
                 else if(usuarioLogueado.getCodigoRol().getCodigo()==3) //JEFE DE SERVICIO
                 {
                     out.print("<FORM ACTION='llamadas' METHOD='post' name='form1' id='form1'>");
-                    out.print("<table border='1'>"
+                    out.print("<table class='table table-striped'>"
                             + "<tr><td>Numero de linea</td>"
                             + "<td>Usuario</td>"
                             + "<td>Departamento</td>"
@@ -117,7 +114,7 @@
                 else if(usuarioLogueado.getCodigoRol().getCodigo()==2)
                 {
                     out.print("<FORM ACTION='llamadas' METHOD='post' name='form1' id='form1'>");
-                    out.print("<table border='1'>");
+                    out.print("<table class='table table-striped'>");
                     out.print("<tr><td>Numero de linea</td>"
                             + "<td>Usuario</td>"
                             + "<td>Departamento</td>"

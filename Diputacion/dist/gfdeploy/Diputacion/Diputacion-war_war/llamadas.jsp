@@ -11,10 +11,7 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Diputación - Llamadas</title>
-    </head>
+    <jsp:include page="res/header.jsp"/>
     <body>
         <% Linea linea = (Linea)request.getAttribute("linea"); %>
         <h1>Llamadas para la línea <% out.print(linea.getNumero()); %></h1>
@@ -29,7 +26,7 @@
         
             <%
             List<Llamada> l = (List<Llamada>)request.getAttribute("listaLlamadas");
-            out.print("<table border='1'>");                        
+            out.print("<table class='table table-hover'>");                        
             out.print("<tr><td>Numero destino</td><td>Duracion</td><td>Coste</td><td>Inicio</td>"
                     + "<td>Fin</td><td>Duracion</td></tr>");
             
