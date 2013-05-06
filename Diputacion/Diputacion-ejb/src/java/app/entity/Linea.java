@@ -15,7 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -54,12 +53,8 @@ public class Linea implements Serializable {
     private Date periodoFacturacion;
     @Column(name = "publico")
     private Character publico;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "linea")
-    private Collection<AsignacionFijo> asignacionFijoCollection;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "linea")
-    private Llamada llamada;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "linea")
-    private Collection<AsignacionMovil> asignacionMovilCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoNumero")
+    private Collection<Llamada> llamadaCollection;
 
     public Linea() {
     }
@@ -106,29 +101,12 @@ public class Linea implements Serializable {
     }
 
     @XmlTransient
-    public Collection<AsignacionFijo> getAsignacionFijoCollection() {
-        return asignacionFijoCollection;
+    public Collection<Llamada> getLlamadaCollection() {
+        return llamadaCollection;
     }
 
-    public void setAsignacionFijoCollection(Collection<AsignacionFijo> asignacionFijoCollection) {
-        this.asignacionFijoCollection = asignacionFijoCollection;
-    }
-
-    public Llamada getLlamada() {
-        return llamada;
-    }
-
-    public void setLlamada(Llamada llamada) {
-        this.llamada = llamada;
-    }
-
-    @XmlTransient
-    public Collection<AsignacionMovil> getAsignacionMovilCollection() {
-        return asignacionMovilCollection;
-    }
-
-    public void setAsignacionMovilCollection(Collection<AsignacionMovil> asignacionMovilCollection) {
-        this.asignacionMovilCollection = asignacionMovilCollection;
+    public void setLlamadaCollection(Collection<Llamada> llamadaCollection) {
+        this.llamadaCollection = llamadaCollection;
     }
 
     @Override

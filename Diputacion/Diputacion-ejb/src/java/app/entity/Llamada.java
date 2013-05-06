@@ -5,15 +5,21 @@
 package app.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -27,13 +33,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Llamada.findAll", query = "SELECT l FROM Llamada l"),
+    @NamedQuery(name = "Llamada.findByCodigo", query = "SELECT l FROM Llamada l WHERE l.codigo = :codigo"),
+    @NamedQuery(name = "Llamada.findByCodigoNumero", query = "SELECT l FROM Llamada l WHERE l.codigoNumero = :codigoNumero"),
     @NamedQuery(name = "Llamada.findByNumeroDestino", query = "SELECT l FROM Llamada l WHERE l.numeroDestino = :numeroDestino"),
     @NamedQuery(name = "Llamada.findByTipo", query = "SELECT l FROM Llamada l WHERE l.tipo = :tipo"),
     @NamedQuery(name = "Llamada.findByDuracion", query = "SELECT l FROM Llamada l WHERE l.duracion = :duracion"),
     @NamedQuery(name = "Llamada.findByCoste", query = "SELECT l FROM Llamada l WHERE l.coste = :coste"),
-    @NamedQuery(name = "Llamada.findByCodigoNumero", query = "SELECT l FROM Llamada l WHERE l.codigoNumero = :codigoNumero")})
+    @NamedQuery(name = "Llamada.findByInicio", query = "SELECT l FROM Llamada l WHERE l.inicio = :inicio"),
+    @NamedQuery(name = "Llamada.findByFin", query = "SELECT l FROM Llamada l WHERE l.fin = :fin")})
 public class Llamada implements Serializable {
     private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "codigo")
+    private Long codigo;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 40)
@@ -46,31 +60,41 @@ public class Llamada implements Serializable {
     @NotNull
     @Column(name = "duracion")
     private int duracion;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Column(name = "coste")
-    private long coste;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "codigo_numero")
-    private Integer codigoNumero;
-    @JoinColumn(name = "codigo_numero", referencedColumnName = "codigo", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private Linea linea;
+    private BigDecimal coste;
+    @Column(name = "inicio")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date inicio;
+    @Column(name = "fin")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fin;
+    @JoinColumn(name = "codigo_numero", referencedColumnName = "codigo")
+    @ManyToOne(optional = false)
+    private Linea codigoNumero;
 
     public Llamada() {
     }
 
-    public Llamada(Integer codigoNumero) {
-        this.codigoNumero = codigoNumero;
+    public Llamada(Long codigo) {
+        this.codigo = codigo;
     }
 
-    public Llamada(Integer codigoNumero, String numeroDestino, int duracion, long coste) {
-        this.codigoNumero = codigoNumero;
+    public Llamada(Long codigo, String numeroDestino, int duracion, BigDecimal coste) {
+        this.codigo = codigo;
         this.numeroDestino = numeroDestino;
         this.duracion = duracion;
         this.coste = coste;
+    }
+
+    public Long getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
     }
 
     public String getNumeroDestino() {
@@ -97,34 +121,42 @@ public class Llamada implements Serializable {
         this.duracion = duracion;
     }
 
-    public long getCoste() {
+    public BigDecimal getCoste() {
         return coste;
     }
 
-    public void setCoste(long coste) {
+    public void setCoste(BigDecimal coste) {
         this.coste = coste;
     }
 
-    public Integer getCodigoNumero() {
+    public Date getInicio() {
+        return inicio;
+    }
+
+    public void setInicio(Date inicio) {
+        this.inicio = inicio;
+    }
+
+    public Date getFin() {
+        return fin;
+    }
+
+    public void setFin(Date fin) {
+        this.fin = fin;
+    }
+
+    public Linea getCodigoNumero() {
         return codigoNumero;
     }
 
-    public void setCodigoNumero(Integer codigoNumero) {
+    public void setCodigoNumero(Linea codigoNumero) {
         this.codigoNumero = codigoNumero;
-    }
-
-    public Linea getLinea() {
-        return linea;
-    }
-
-    public void setLinea(Linea linea) {
-        this.linea = linea;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (codigoNumero != null ? codigoNumero.hashCode() : 0);
+        hash += (codigo != null ? codigo.hashCode() : 0);
         return hash;
     }
 
@@ -135,7 +167,7 @@ public class Llamada implements Serializable {
             return false;
         }
         Llamada other = (Llamada) object;
-        if ((this.codigoNumero == null && other.codigoNumero != null) || (this.codigoNumero != null && !this.codigoNumero.equals(other.codigoNumero))) {
+        if ((this.codigo == null && other.codigo != null) || (this.codigo != null && !this.codigo.equals(other.codigo))) {
             return false;
         }
         return true;
@@ -143,7 +175,7 @@ public class Llamada implements Serializable {
 
     @Override
     public String toString() {
-        return "app.entity.Llamada[ codigoNumero=" + codigoNumero + " ]";
+        return "app.entity.Llamada[ codigo=" + codigo + " ]";
     }
     
 }

@@ -4,10 +4,12 @@
  */
 package app.dao;
 
+import app.entity.Linea;
 import app.entity.Llamada;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 /**
  *
@@ -25,6 +27,14 @@ public class LlamadaFacade extends AbstractFacade<Llamada> {
 
     public LlamadaFacade() {
         super(Llamada.class);
+    }
+    
+    public List<Llamada> findByCodigoNumero(Linea codigoNumero){
+        List<Llamada> l = (List<Llamada>)em.createQuery(
+                "SELECT l FROM Llamada l WHERE l.codigoNumero = :codigoNumero")
+                .setParameter("codigoNumero", codigoNumero)
+                .getResultList();
+        return l;
     }
     
 }
