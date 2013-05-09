@@ -70,7 +70,7 @@
 								<td class="center">Member</td>
 								<td class="center">Member</td>
 								<td class="center">
-									<span class="label label-success">Active</span>
+									<span class="label label-success">Activo</span>
 								</td>
 								<td class="center">
 									<a class="btn btn-success" href="#">

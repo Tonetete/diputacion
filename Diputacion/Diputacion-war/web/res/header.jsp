@@ -66,7 +66,7 @@
 				<!-- user dropdown starts -->
 				<div class="btn-group pull-right" >
 					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-						<i class="icon-user"></i><span class="hidden-phone"> <%=nombre%></span>
+						<i class="icon2-user"></i><span class="hidden-phone"> <%=nombre%></span>
 						<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">

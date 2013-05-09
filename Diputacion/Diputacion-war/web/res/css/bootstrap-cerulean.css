@@ -1493,6 +1493,20 @@ table .span24 {
 [class*=" icon-"]:last-child {
   *margin-left: 0;
 }
+
+[class^="icon2-"],
+[class*=" icon2-"] {
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  *margin-right: .3em;
+  line-height: 14px;
+  vertical-align: text-top;
+  background-image: url("../img/vector_icons.png");
+  background-position: 14px 14px;
+  background-repeat: no-repeat;
+}
+
 .icon-white {
   background-image: url("../img/glyphicons-halflings-white.png");
 }
@@ -1517,9 +1531,7 @@ table .span24 {
 .icon-star-empty {
   background-position: -144px 0;
 }
-.icon-user {
-  background-position: -168px 0;
-}
+
 .icon-film {
   background-position: -192px 0;
 }
@@ -1688,9 +1700,6 @@ table .span24 {
 .icon-tint {
   background-position: -72px -72px;
 }
-.icon-edit {
-  background-position: -96px -72px;
-}
 .icon-share {
   background-position: -120px -72px;
 }
@@ -1808,9 +1817,7 @@ table .span24 {
 .icon-fire {
   background-position: -72px -120px;
 }
-.icon-eye-open {
-  background-position: -96px -120px;
-}
+
 .icon-eye-close {
   background-position: -120px -120px;
 }
@@ -1916,6 +1923,22 @@ table .span24 {
 .icon-fullscreen {
   background-position: -456px -144px;
 }
+
+[class^="icon2-"]:last-child,
+[class*=" icon2-"]:last-child {
+  *margin-left: 0;
+}
+.icon2-terminal {
+  background-position: -267px -390px;
+}
+
+.icon2-linea {
+  background-position: -546px -188px;
+}
+.icon2-user {
+  background-position: -387px -149px;
+}
+
 .dropup,
 .dropdown {
   position: relative;
