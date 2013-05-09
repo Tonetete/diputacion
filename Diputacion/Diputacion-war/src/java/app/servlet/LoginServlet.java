@@ -74,7 +74,7 @@ public class LoginServlet extends HttpServlet {
             jsonElem = gson.toJsonTree(u.getCodigoRol().getCodigo().toString());
             json.add("usuariorol", jsonElem);
             request.getSession(true);
-            request.getSession().setMaxInactiveInterval(300);
+            //request.getSession().setMaxInactiveInterval(300);
             request.getSession().setAttribute("usuario", u);           
                                   
         }
