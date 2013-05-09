@@ -4,8 +4,9 @@
     Author     : Tone
 --%>
 
-<!-- external javascript
-	================================================== -->
+<footer>
+<!-- external javascript 
+================================================= -->
 	<!-- Placed at the end of the document so the pages load faster -->
 
 	<!-- jQuery -->
@@ -69,12 +70,9 @@
 	<!-- history.js for cross-browser state change on ajax -->
 	<script src="res/js/jquery.history.js"></script>
 	<!-- application script for Charisma demo -->
-	<script src="js/charisma.js"></script>
-	<script src="js/script.js"></script>
-	<script src="js/jquery.easing.js"></script>
-	<script src="js/jquery.1.6.4.js"></script>
-	<script src="js/jquery.scrollTo-1.4.2-min.js"></script>
+	<script src="res/js/charisma.js"></script>
+
         <!-- Logout script -->
         <script src="res/js/logout.js"></script>
 
-	
+</footer>	
