@@ -13,9 +13,10 @@
 <html>
     
     <jsp:include page="res/header.jsp"/>
-    <body>
-        
-        
+    
+    <body>        
+        <jsp:include page="res/sidebar.jsp"/>    
     </body>
+    
     <jsp:include page="res/footer.jsp"/>
 </html>
