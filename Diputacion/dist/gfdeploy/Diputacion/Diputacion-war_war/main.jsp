@@ -24,10 +24,7 @@
     %>
     <jsp:include page="res/header.jsp"/>
     <body>
-        <form name="send" method="POST" action="http://localhost:8080/Diputacion-war/listmovil">
-            <input type="text" name="dni">
-            <input type="submit" name="submit" value="ENVIAR DNI">  
-        </form>
+        
         
     </body>
 </html>

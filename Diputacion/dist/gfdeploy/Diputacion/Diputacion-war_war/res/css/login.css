@@ -1,0 +1,231 @@
+/* 
+    Document   : login
+    Created on : 09-may-2013, 12:55:55
+    Author     : Tone
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+* { 
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box; 
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+}
+html {
+   height: 100%; 
+}
+input {
+    padding:0;
+    margin:0;
+    font-size:100%;
+}
+button {
+    border:none;
+}
+body {
+    line-height: 1;
+    background: #0ea4d3;
+    background: -moz-linear-gradient(top, #0ea4d3 0%, #57bfe0 100%);
+    background: -webkit-linear-gradient(top, #0ea4d3 0%, #57bfe0 100%);
+    background: -o-linear-gradient(top, #0ea4d3 0%, #57bfe0 100%);
+    background-attachment: fixed;
+    height: 100%;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: -webkit-gradient(linear, 0 0, 0 0, from(#0ea4d3), to(#57bfe0));
+} 
+form {
+    width:374px;
+    height:254px;
+    margin:80px auto 0 auto;
+    -webkit-border-radius:2px;
+    border-radius:2px;
+}
+fieldset, 
+form fieldset input.dataCapture {
+    border:none;
+}
+/* LoginBox styles */
+.loginBox {
+    width:360px;
+    -webkit-box-shadow:  0px 0px 0px 7px rgba(0, 0, 0, .1);
+    box-shadow:  0px 0px 0px 7px rgba(0, 0, 0, .1);
+    border-radius:4px;
+    -webkit-border-radius:4px;
+    border:1px solid #1988ab;
+    background-color:#fdfdfd;
+}
+/* LoginBox heading */
+.loginBox h2 {
+    height:45px;
+    width:359px;
+    display:block;
+    -webkit-box-shadow:  0px 0px 0px 1px #bfc3c5;
+    box-shadow:  0px 0px 0px 1px #bfc3c5;
+    margin:0;
+    padding:0;
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-top-right-radius: 4px;
+    border-top-left-radius:4px;
+    border-top-right-radius:4px;
+    border-bottom:1px solid #f6f8f9;
+    font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size:14px;
+    line-height:45px;
+    text-align:center;
+    text-shadow: 1px 1px 0px #ffffff;
+    color:#555555;
+    font-weight:bold;
+    background: #fafbfc; 
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZhZmJmYyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUyJSIgc3RvcC1jb2xvcj0iI2VjZjFmNCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+    background: -moz-linear-gradient(top,  #fafbfc 0%, #ecf1f4 52%); 
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fafbfc), color-stop(52%,#ecf1f4)); 
+    background: -webkit-linear-gradient(top,  #fafbfc 0%,#ecf1f4 52%); 
+    background: -o-linear-gradient(top,  #fafbfc 0%,#ecf1f4 52%); 
+    background: -ms-linear-gradient(top,  #fafbfc 0%,#ecf1f4 52%); 
+    background: linear-gradient(to bottom,  #fafbfc 0%,#ecf1f4 52%); 
+}
+/* Submit Button styles */
+.loginBox button{
+    float:left;
+    position:relative;
+    display:block;
+    padding:9px;
+    margin:0px 0px 0px 20px;    
+    width:120px;
+    border-radius:20px;
+    -webkit-border-radius:20px;
+    border:1px solid #9eb9c3;
+    box-shadow:0 0 0 1px #f2f5f7, 0 0 0 2px #f2f5f7, 0 0 0 3px #f2f5f7, 0 0 0 7px #f2f5f7;
+    -webkit-shadow:0 0 0 1px #f2f5f7, 0 0 0 2px #f2f5f7, 0 0 0 4px #f2f5f7, 0 0 0 7px #f2f5f7;
+    font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size:14px;
+    font-weight:bold;
+    color:#527988;    
+    background: #ffffff; 
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIxJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjYlIiBzdG9wLWNvbG9yPSIjZWRmNmY5IiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2NkZTVlZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+    background: -moz-linear-gradient(top,  #ffffff 1%, #edf6f9 6%, #cde5ee 100%); 
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#ffffff), color-stop(6%,#edf6f9), color-stop(100%,#cde5ee)); 
+    background: -webkit-linear-gradient(top,  #ffffff 1%,#edf6f9 6%,#cde5ee 100%); 
+    background: -o-linear-gradient(top,  #ffffff 1%,#edf6f9 6%,#cde5ee 100%); 
+    background: -ms-linear-gradient(top,  #ffffff 1%,#edf6f9 6%,#cde5ee 100%); 
+    background: linear-gradient(to bottom,  #ffffff 1%,#edf6f9 6%,#cde5ee 100%); 
+}
+.loginBox button:hover{
+    cursor:pointer;
+    box-shadow:0 0 0 1px #f2f5f7, 0 0 0 2px #f2f5f7, 0 0 0 3px #f2f5f7, 0 0 0 7px #f2f5f7;
+    -webkit-shadow:0 0 0 1px #f2f5f7, 0 0 0 2px #f2f5f7, 0 0 0 4px #f2f5f7, 0 0 0 7px #f2f5f7;
+    background: #ffffff;    
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIxJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjYlIiBzdG9wLWNvbG9yPSIjZDBlNmVmIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2U1ZjFmNiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+    background: -moz-linear-gradient(top,  #ffffff 1%, #d0e6ef 6%, #e5f1f6 100%); 
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#ffffff), color-stop(6%,#d0e6ef), color-stop(100%,#e5f1f6));
+    background: -webkit-linear-gradient(top,  #ffffff 1%,#d0e6ef 6%,#e5f1f6 100%);
+    background: -o-linear-gradient(top,  #ffffff 1%,#d0e6ef 6%,#e5f1f6 100%); 
+    background: -ms-linear-gradient(top,  #ffffff 1%,#d0e6ef 6%,#e5f1f6 100%); 
+    background: linear-gradient(to bottom,  #ffffff 1%,#d0e6ef 6%,#e5f1f6 100%); 
+}
+/* input styles */
+input[type="text"], input[type="password"] {
+    width:80%;
+    margin:20px 0px 5px 25px;
+    padding:10px;
+     color:#aeaeae;
+    border-radius:2px;
+    -webkit-border-radius:2px;
+    border:1px solid #c1c5c8;
+    box-shadow:0 0 0 1px #f2f5f7, 0 0 0 2px #f2f5f7, 0 0 0 3px #f2f5f7, 0 0 0 7px #f2f5f7;
+    -webkit-shadow:0 0 0 1px #f2f5f7, 0 0 0 2px #f2f5f7, 0 0 0 4px #f2f5f7, 0 0 0 7px #f2f5f7;
+    background-color:#fff;
+    background: #e5e5e5; 
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2U1ZTVlNSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjE3JSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  #e5e5e5 0%, #ffffff 17%, #ffffff 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e5e5e5), color-stop(17%,#ffffff), color-stop(100%,#ffffff)); 
+    background: -webkit-linear-gradient(top,  #e5e5e5 0%,#ffffff 17%,#ffffff 100%); 
+    background: -o-linear-gradient(top,  #e5e5e5 0%,#ffffff 17%,#ffffff 100%); 
+    background: -ms-linear-gradient(top,  #e5e5e5 0%,#ffffff 17%,#ffffff 100%); 
+    background: linear-gradient(to bottom,  #e5e5e5 0%,#ffffff 17%,#ffffff 100%); 
+}
+input[type="text"]:focus, input[type="password"]:focus{
+    border:1px solid #7dc6dd;
+    box-shadow:0 0 0 1px #e0f1fc, 0 0 0 2px #e0f1fc, 0 0 0 3px #e0f1fc, 0 0 0 7px #e0f1fc;
+    -webkit-shadow:0 0 0 1px #e0f1fc, 0 0 0 2px #e0f1fc, 0 0 0 4px #e0f1fc, 0 0 0 7px #e0f1fc;
+    outline-color:#7dc6dd;
+}
+input[type="checkbox"] {
+    color:#555555;
+}
+/* Error Message styles */
+.errorMsg {
+    display:none;
+    position:absolute;
+    top:0;
+    width:100%;
+    height:45px;
+    font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight:bold;
+    color:#e34848;
+    text-shadow: 1px 0px 0px #ffffff;
+    font-size:14px;
+     line-height:45px;
+    text-align:center;
+    background-color:#f3fafd;
+    box-shadow:0 0 0 1px #eaeff3, 0 0 0 2px #eaeff3, 0 0 0 3px #eaeff3, 0 0 0 5px #eaeff3, 0px 0px 20px 7px #0c86ad;
+    -webkit-shadow:0 0 0 1px #eaeff3, 0 0 0 2px #eaeff3, 0 0 0 4px #eaeff3, 0 0 0 5px #eaeff3, 0px 0px 20px 7px #0c86ad;
+}
+.errorMsg a {
+    float:right;
+    display:block;
+    padding:0px 20px 10px 10px;
+    color:#b2bbbf;
+    font-size:18px;
+    font-weight:normal;
+    text-decoration:none;
+}
+.errorMsg a:hover {
+    color:#717c81;
+}
+/* Submission fieldset positioning */
+.submission {
+    margin-top:0px;
+    width:325px;
+    padding:20px 0px 20px 20px;
+}
+.submission label {
+    color:#555555;
+    font-size:12px;
+    margin:10px 10px 0px 5px;
+    padding:0;
+    float:left;
+    line-height:18px;
+}
+/* Checkbox */
+.submission input {
+    margin-top:12px;
+    float:left;
+}
+/* Forgot password message */
+.forgotPassword {
+    margin:0;
+    padding:0;
+    margin-top:20px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+    color:#fff;
+    font-size:14px;
+    font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.forgotPassword a {
+    font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+    color:#cbebf6;
+    font-size:14px;
+    text-shadow: 1px 1px 1px #389dbb;
+    filter: dropshadow(color=#389dbb, offx=1, offy=1);
+    text-decoration:none;
+}
+.forgotPassword a:hover {
+    color:#c8dde4;
+}
