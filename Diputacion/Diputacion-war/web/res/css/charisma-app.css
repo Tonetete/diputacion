@@ -350,9 +350,7 @@ width:166px;
 }
 .brand img{
 float:left;
-height: 95px;
-width: 150px;
-margin-right:5px;
+margin-top: 5px;
 }
 .brand span{
 float:left;
@@ -384,13 +382,6 @@ margin-bottom:0;
 
 .navbar-search{
 margin-left:10px;
-}
-.navbar-inner{
-border-radius:0 0 10px 10px;
--webkit-border-radius:0 0 10px 10px;
--moz-border-radius:0 0 10px 10px;
-padding-top:5px; 
-padding-bottom:5px; 
 }
 div.dataTables_length select {
 width: 50px;
