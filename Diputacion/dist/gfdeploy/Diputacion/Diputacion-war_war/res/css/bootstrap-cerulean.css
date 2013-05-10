@@ -1511,7 +1511,10 @@ table .span24 {
   background-image: url("../img/glyphicons-halflings-white.png");
 }
 .icon-glass {
-  background-position: 0      0;
+  background-position: 0  0
+}
+.icon-edit{
+    background-position: 0px -72px;
 }
 .icon-music {
   background-position: -24px 0;
@@ -1568,9 +1571,7 @@ table .span24 {
 .icon-trash {
   background-position: -456px 0;
 }
-.icon-home {
-  background-position: 0 -24px;
-}
+
 .icon-file {
   background-position: -24px -24px;
 }
@@ -1601,9 +1602,7 @@ table .span24 {
 .icon-refresh {
   background-position: -240px -24px;
 }
-.icon-list-alt {
-  background-position: -264px -24px;
-}
+
 .icon-lock {
   background-position: -287px -24px;
 }
@@ -1937,6 +1936,14 @@ table .span24 {
 }
 .icon2-user {
   background-position: -387px -149px;
+}
+
+.icon2-home {
+  background-position: -226px -150px;
+}
+
+.icon2-gastos {
+  background-position: -469px -388px;
 }
 
 .dropup,
