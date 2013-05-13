@@ -1587,6 +1587,18 @@ img.mail, img.bell, img.user{
   background-position: 14px 14px;
   background-repeat: no-repeat;
 }
+[class^="icon3-"],
+[class*=" icon3-"] {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  *margin-right: .3em;
+  line-height: 14px;
+  vertical-align: text-top;
+  background-image: url("../img/glyphicons-halflings-white.png");
+  background-position: 14px 14px;
+  background-repeat: no-repeat;
+}
 [class^="icon-"]:last-child,
 [class*=" icon-"]:last-child {
   *margin-left: 0;
@@ -1608,7 +1620,7 @@ img.mail, img.bell, img.user{
 .icon-glass {
   background-position: 0  0
 }
-.icon-edit{
+.icon3-edit{
     background-position: 0px -72px;
 }
 .icon-music {
@@ -1648,7 +1660,7 @@ img.mail, img.bell, img.user{
 .icon-remove {
   background-position: -312px 0;
 }
-.icon-zoom-in {
+.icon3-zoom-in {
   background-position: -336px 0;
 }
 .icon-zoom-out {
@@ -1663,7 +1675,7 @@ img.mail, img.bell, img.user{
 .icon-cog {
   background-position: -432px 0;
 }
-.icon-trash {
+.icon3-trash {
   background-position: -456px 0;
 }
 

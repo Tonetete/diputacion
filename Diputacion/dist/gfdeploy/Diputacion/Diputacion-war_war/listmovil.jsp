@@ -74,15 +74,15 @@
 								</td>
 								<td class="center">
 									<a class="btn btn-success" href="#">
-										<i class="icon-zoom-in icon-white"></i>  
+										<i class="icon3-zoom-in icon-white"></i>  
 										View                                            
 									</a>
 									<a class="btn btn-info" href="#">
-										<i class="icon-edit icon-white"></i>  
+										<i class="icon3-edit icon-white"></i>  
 										Edit                                            
 									</a>
 									<a class="btn btn-danger" href="#">
-										<i class="icon-trash icon-white"></i> 
+										<i class="icon3-trash icon-white"></i> 
 										Delete
 									</a>
 								</td>

@@ -36,6 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuario.findByApellidos", query = "SELECT u FROM Usuario u WHERE u.apellidos = :apellidos"),
     @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email")})
 public class Usuario implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dniTareaAsignado")
+    private Collection<Tarea> tareaCollection;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -197,6 +199,15 @@ public class Usuario implements Serializable {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+    @XmlTransient
+    public Collection<Tarea> getTareaCollection() {
+        return tareaCollection;
+    }
+
+    public void setTareaCollection(Collection<Tarea> tareaCollection) {
+        this.tareaCollection = tareaCollection;
     }
     
 }

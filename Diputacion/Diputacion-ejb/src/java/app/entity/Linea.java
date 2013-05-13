@@ -37,6 +37,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Linea.findByPeriodoFacturacion", query = "SELECT l FROM Linea l WHERE l.periodoFacturacion = :periodoFacturacion"),
     @NamedQuery(name = "Linea.findByPublico", query = "SELECT l FROM Linea l WHERE l.publico = :publico")})
 public class Linea implements Serializable {
+    @OneToMany(mappedBy = "codigoNumero")
+    private Collection<Tarea> tareaCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -132,6 +134,15 @@ public class Linea implements Serializable {
     @Override
     public String toString() {
         return "app.entity.Linea[ codigo=" + codigo + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Tarea> getTareaCollection() {
+        return tareaCollection;
+    }
+
+    public void setTareaCollection(Collection<Tarea> tareaCollection) {
+        this.tareaCollection = tareaCollection;
     }
     
 }
