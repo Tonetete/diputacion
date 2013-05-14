@@ -26,7 +26,7 @@
                                 <h2>Iniciar Sesión al panel de la diputación</h2>
 
                                 <fieldset class="dataCapture">
-                                    <input id="usuario" type="text" placeholder="Usuario" value="13163532B"/>
+                                    <input id="usuario" type="text" placeholder="Usuario" value="71946976D"/>
                                     <input id="contrasena" type="password" placeholder="Contraseña" value="1234"/>
                                 </fieldset>
 

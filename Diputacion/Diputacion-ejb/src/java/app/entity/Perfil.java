@@ -5,6 +5,7 @@
 package app.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -32,6 +33,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Perfil.findByDescripcion", query = "SELECT p FROM Perfil p WHERE p.descripcion = :descripcion"),
     @NamedQuery(name = "Perfil.findBySaldoLimite", query = "SELECT p FROM Perfil p WHERE p.saldoLimite = :saldoLimite")})
 public class Perfil implements Serializable {
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "coste")
+    private BigDecimal coste;
     @OneToMany(mappedBy = "codigoPerfil")
     private Collection<Tarea> tareaCollection;
     private static final long serialVersionUID = 1L;
@@ -120,6 +124,14 @@ public class Perfil implements Serializable {
 
     public void setTareaCollection(Collection<Tarea> tareaCollection) {
         this.tareaCollection = tareaCollection;
+    }
+
+    public BigDecimal getCoste() {
+        return coste;
+    }
+
+    public void setCoste(BigDecimal coste) {
+        this.coste = coste;
     }
     
 }

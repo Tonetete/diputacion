@@ -37,6 +37,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Linea.findByPeriodoFacturacion", query = "SELECT l FROM Linea l WHERE l.periodoFacturacion = :periodoFacturacion"),
     @NamedQuery(name = "Linea.findByPublico", query = "SELECT l FROM Linea l WHERE l.publico = :publico")})
 public class Linea implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "linea")
+    private Collection<AsignacionFijo> asignacionFijoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "linea")
+    private Collection<AsignacionMovil> asignacionMovilCollection;
     @OneToMany(mappedBy = "codigoNumero")
     private Collection<Tarea> tareaCollection;
     private static final long serialVersionUID = 1L;
@@ -143,6 +147,24 @@ public class Linea implements Serializable {
 
     public void setTareaCollection(Collection<Tarea> tareaCollection) {
         this.tareaCollection = tareaCollection;
+    }
+
+    @XmlTransient
+    public Collection<AsignacionFijo> getAsignacionFijoCollection() {
+        return asignacionFijoCollection;
+    }
+
+    public void setAsignacionFijoCollection(Collection<AsignacionFijo> asignacionFijoCollection) {
+        this.asignacionFijoCollection = asignacionFijoCollection;
+    }
+
+    @XmlTransient
+    public Collection<AsignacionMovil> getAsignacionMovilCollection() {
+        return asignacionMovilCollection;
+    }
+
+    public void setAsignacionMovilCollection(Collection<AsignacionMovil> asignacionMovilCollection) {
+        this.asignacionMovilCollection = asignacionMovilCollection;
     }
     
 }

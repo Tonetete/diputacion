@@ -5,6 +5,7 @@
 package app.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -35,6 +36,14 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "AsignacionMovil.findByCodigoNumero", query = "SELECT a FROM AsignacionMovil a WHERE a.asignacionMovilPK.codigoNumero = :codigoNumero"),
     @NamedQuery(name = "AsignacionMovil.findByCodigoTerminal", query = "SELECT a FROM AsignacionMovil a WHERE a.asignacionMovilPK.codigoTerminal = :codigoTerminal")})
 public class AsignacionMovil implements Serializable {
+
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "coste")
+    private BigDecimal coste;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "asignado")
+    private char asignado;
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected AsignacionMovilPK asignacionMovilPK;
@@ -157,6 +166,23 @@ public class AsignacionMovil implements Serializable {
     @Override
     public String toString() {
         return "app.entity.AsignacionMovil[ asignacionMovilPK=" + asignacionMovilPK + " ]";
+    }
+
+
+    public BigDecimal getCoste() {
+        return coste;
+    }
+
+    public void setCoste(BigDecimal coste) {
+        this.coste = coste;
+    }
+
+    public char getAsignado() {
+        return asignado;
+    }
+
+    public void setAsignado(char asignado) {
+        this.asignado = asignado;
     }
     
 }
