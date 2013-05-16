@@ -660,6 +660,7 @@ input[type="color"],
   line-height: 18px;
   color: #555555;
 }
+
 input,
 textarea {
   width: 210px;
@@ -667,6 +668,7 @@ textarea {
 textarea {
   height: auto;
 }
+
 textarea,
 input[type="text"],
 input[type="password"],
@@ -887,6 +889,8 @@ input[type="radio"][readonly],
 input[type="checkbox"][readonly] {
   background-color: transparent;
 }
+
+
 .control-group.warning > label,
 .control-group.warning .help-block,
 .control-group.warning .help-inline {
@@ -1283,6 +1287,7 @@ table {
 .table thead th {
   vertical-align: bottom;
 }
+
 .table caption + thead tr:first-child th,
 .table caption + thead tr:first-child td,
 .table colgroup + thead tr:first-child th,
@@ -1622,6 +1627,9 @@ img.mail, img.bell, img.user{
 }
 .icon3-edit{
     background-position: 0px -72px;
+}
+.icon3-user{
+    background-position: 0px -95px;
 }
 .icon-music {
   background-position: -24px 0;

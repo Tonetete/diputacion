@@ -72,9 +72,9 @@
 	<!-- application script for Charisma demo -->
 	<script src="res/js/charisma.js"></script>
 
-        <!-- Referente a la carga de formularios modales con ajax -->
 
         <!-- Logout script -->
         <script src="res/js/logout.js"></script>
+        
 
 </footer>	

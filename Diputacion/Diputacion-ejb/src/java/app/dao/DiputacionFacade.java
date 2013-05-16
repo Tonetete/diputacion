@@ -8,6 +8,7 @@ import app.entity.Diputacion;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -25,6 +26,11 @@ public class DiputacionFacade extends AbstractFacade<Diputacion> {
 
     public DiputacionFacade() {
         super(Diputacion.class);
+    }
+    
+    public Diputacion getDiputacionByCiudad(String ciudad){
+        Query q = em.createNamedQuery("Diputacion.findByCiudad").setParameter("ciudad", ciudad);
+        return (Diputacion)q.getSingleResult();
     }
     
 }

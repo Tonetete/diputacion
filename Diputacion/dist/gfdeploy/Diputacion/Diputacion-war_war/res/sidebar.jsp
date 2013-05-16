@@ -29,7 +29,7 @@
                         <li><a class="ajax-link" href="form.html"><i class="icon2-terminal"></i><span class="hidden-tablet"> Terminales</span></a></li>
                         <li><a class="ajax-link" href="chart.html"><i class="icon2-gastos"></i><span class="hidden-tablet"> Gestión de Gastos</span></a></li>
                         <% if(rol.equals("administrador")){ %>
-                        <li><a class="ajax-link" href="UsuariosServlet"><i class="icon2-user"></i><span class="hidden-tablet"> Gestión de Usuarios</span></a></li>
+                        <li><a class="ajax-link" href="usuarios?action=list"><i class="icon2-user"></i><span class="hidden-tablet"> Gestión de Usuarios</span></a></li>
                         <%}%>
                         <li><a class="ajax-link" href="gallery.html"><i class="icon-picture"></i><span class="hidden-tablet"> Gallery</span></a></li>                        
                 </ul>

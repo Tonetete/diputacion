@@ -15,6 +15,8 @@
     <jsp:include page="res/header.jsp"/>
     
     <body>       
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script type ="text/javascript" src="forms/form-usuario.js"></script>
        <!-- topbar ends -->
 		<div class="container-fluid">
                     <div class="row-fluid">
@@ -90,7 +92,7 @@
 						<p><b>All pages in the menu are functional, take a look at all, please share this with your followers.</b></p>
 						
 						<p class="center">
-							<a href="http://usman.it/free-responsive-admin-template" class="btn btn-large btn-primary"><i class="icon-chevron-left icon-white"></i> Back to article</a> 
+							<a id="delete" class="btn btn-large btn-primary"><i class="icon-chevron-left icon-white"></i> Back to article</a> 
 							<a href="http://usman.it/free-responsive-admin-template" class="btn btn-large"><i class="icon-download-alt"></i> Download Page</a>
 						</p>
 						<div class="clearfix"></div>

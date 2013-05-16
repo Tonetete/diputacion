@@ -4,10 +4,12 @@
  */
 package app.dao;
 
+import app.entity.Diputacion;
 import app.entity.Roles;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -25,6 +27,11 @@ public class RolesFacade extends AbstractFacade<Roles> {
 
     public RolesFacade() {
         super(Roles.class);
+    }
+    
+    public Roles getRolByTipo(String tipo){
+        Query q = em.createNamedQuery("Roles.findByTipo").setParameter("tipo", tipo);
+        return (Roles)q.getSingleResult();
     }
     
 }

@@ -1,5 +1,7 @@
 
 
+<%@page import="app.entity.Roles"%>
+<%@page import="app.entity.Diputacion"%>
 <%-- 
     Document   : index
     Created on : 30-abr-2013, 14:17:02
@@ -12,9 +14,6 @@
 
 <!DOCTYPE html>
 <html>
-<link href="http://www.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet"> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-<script src="http://www.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
 
     <jsp:include page="res/header.jsp"/>
     
@@ -50,15 +49,19 @@
 							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
 							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
 							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+                                                        <a data-toggle='modal' href="#form-usuario" class="btn btn-primary insertar"><i class="icon3-user"></i> Crear Usuario</a>
 						</div>
 					</div>
 					<div class="box-content">
+                                            
 						<table class="table table-striped table-bordered bootstrap-datatable datatable">
+                                                    
 						  <thead>
 							  <tr>
 								  <th>DNI</th>
 								  <th>Contraseña</th>
-								  <th>Nombre y Apellidos</th>
+								  <th>Nombre</th>
+								  <th>Apellidos</th>
 								  <th>Email</th>
 								  <th>Diputación</th>
 								  <th>Rol</th>								  
@@ -70,13 +73,14 @@
                                                          List<Usuario> listaUsuarios = (List<Usuario>)request.getAttribute("listaUsuarios"); 
                                                          for(int i=0; i<listaUsuarios.size(); i++) { 
 							 out.print("<tr>");        
-                                                         out.print("<td>"+listaUsuarios.get(i).getDni()+"</td>");
-                                                         out.print("<td class='center'>"+listaUsuarios.get(i).getContrasena()+"</td>");                                                            
-                                                         out.print("<td class='center'>"+listaUsuarios.get(i).getNombre()+" "+listaUsuarios.get(i).getApellidos()+"</td>");
-                                                         out.print("<td class='center'>"+listaUsuarios.get(i).getEmail()+"</td>");
-                                                         out.print("<td class='center'>"+listaUsuarios.get(i).getCodigoDip().getCiudad()+"</td>");
-                                                         out.print("<td class='center'>"+listaUsuarios.get(i).getCodigoRol().getTipo()+"</td>");						
-                                                         out.print("<td class='center'><a data-toggle='modal' href='#form-usuario' class='btn btn-success'><i class='icon3-edit icon-white'></i>Editar</a> <a class='btn btn-danger' href='#'><i class='icon3-trash icon-white'></i>Borrar</a></td>");
+                                                         out.print("<td id='dni'>"+listaUsuarios.get(i).getDni()+"</td>");
+                                                         out.print("<td id='contrasena' class='center'>"+listaUsuarios.get(i).getContrasena()+"</td>");                                                            
+                                                         out.print("<td id='nombre' class='center'>"+listaUsuarios.get(i).getNombre()+"</td>");
+                                                         out.print("<td id='apellidos' class='center'>"+listaUsuarios.get(i).getApellidos()+"</td>");
+                                                         out.print("<td id='email' class='center'>"+listaUsuarios.get(i).getEmail()+"</td>");
+                                                         out.print("<td id='diputacion' class='center'>"+listaUsuarios.get(i).getCodigoDip().getCiudad()+"</td>");
+                                                         out.print("<td id='rol' class='center'>"+listaUsuarios.get(i).getCodigoRol().getTipo()+"</td>");						
+                                                         out.print("<td class='center'><a data-toggle='modal' href='#form-usuario' class='btn btn-success edit'><i class='icon3-edit icon-white'></i>Editar</a> <a data-toggle='modal' href='#form-borrar-usuario' class='btn btn-danger delete' href='#'><i class='icon3-trash icon-white'></i>Borrar</a></td>");
 							 out.print("</tr>");
                                                       }%>
 						  </tbody>
@@ -85,50 +89,61 @@
                                                   <div class="hide fade modal" id="form-usuario">
                                                         <div class="modal-header">
                                                           <button type="button" class="close" data-dismiss="modal">×</button>
-                                                          <h2>Your Review</h2>
+                                                          <h3>Editar Datos</h3>
                                                         </div>
 
                                                         <div class="modal-body">
                                                           <!-- The async form to send and replace the modals content with its response -->
-                                                          <form class="form-horizontal well" data-async data-target="#rating-modal" action="/some-endpoint" method="POST">
+                                                          <form class="form-horizontal well" data-async data-target="#rating-modal" action="/usuarios" method="POST">
                                                             <fieldset>
-                                                              <!-- form content -->
+                                                              <!-- form content --> 
+                                                              <h4 id="dni-h4" style="display:none;">DNI: </h4><input name="dni" id="dni" type="text" style="display:none;"  />
+                                                              <h4>Nombre: </h4><input name="nombre" id="nombre" type="text" />
+                                                              <h4>Apellidos: </h4><input name="apellidos" id="apellidos" type="text" />
+                                                              <h4>Contraseña: </h4><input name="contrasena" id="contrasena" type="text" />
+                                                              <h4>Email: </h4><input name="email" id="email" type="text" />
+                                                              <h4>Diputacion: </h4><select name="diputacion" id="diputacion">
+                                                                  <% List<Diputacion> diputaciones = (List<Diputacion>)request.getAttribute("listaDiputaciones");
+                                                                    for(int i=0;i<diputaciones.size();i++){                                                                        
+                                                                        out.print("<option value='"+diputaciones.get(i).getCiudad()+"'>"+diputaciones.get(i).getCiudad()+"</value>");
+                                                                    }   
+                                                                  %>
+                                                              </select>
+                                                              <h4>Rol: </h4><select name="rol" id="rol">
+                                                                  <% List<Roles> roles = (List<Roles>)request.getAttribute("listaRoles");
+                                                                    for(int i=0;i<roles.size();i++){                                                                        
+                                                                       out.print("<option value='"+roles.get(i).getTipo()+"'>"+roles.get(i).getTipo()+"</value>");
+                                                                    }   
+                                                                  %>
+                                                              </select>                                                              
                                                             </fieldset>
                                                           </form>
                                                         </div>
 
                                                         <div class="modal-footer">
                                                           <a href="#" class="btn" data-dismiss="modal">Cancel</a>
-                                                          <a href="#" class="btn" type="submit">OK</a>
+                                                          <a href="#" class="btn btn-primary ok" type="submit">OK</a>
                                                         </div>
                                                       </div>                                  
                 
-                                                    <script type="text/javascript">
-//                                                    jQuery(function($) {
-//                                                        $('#form-usuario').click(function(event) {
-//                                                            var $form = $(this);
-//                                                            var $target = $($form.attr('data-target'));
-//
-//                                                            $.ajax({
-//                                                                type: $form.attr('method'),
-//                                                                url: $form.attr('action'),
-//                                                                data: $form.serialize(),
-//
-//                                                                success: function(data, status) {
-//                                                                    $target.html(data);
-//                                                                    console.log("correcto");                                                                    
-//                                                                    $('#form-usuario').modal('hide');
-//                                                                },
-//                                                                error: function(textStatus){
-//                                                                  alert("pfff!");
-//                                                                  $('#form-usuario').modal('hide');
-//                                                                }
-//                                                            });
-//
-//                                                            event.preventDefault();
-//                                                        });
-//                                                    });
-                                                    </script>
+                                                    
+                                                  <!-- end modal -->
+                                                  <!-- Bootstrap trigger to open modal -->
+                                                  <div class="hide fade modal" id="form-borrar-usuario">
+                                                        <div class="modal-header">
+                                                          <button type="button" class="close" data-dismiss="modal">×</button>
+                                                          <h3>Borrar Datos</h3>
+                                                        </div>
+
+                                                        <div class="modal-body">
+                                                            <p>Estás apunto de borrar el registro. ¿Desea seguir?</p>
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                          <a href="#" class="btn" data-dismiss="modal">Cancelar</a>
+                                                          <a href="#" class="btn btn-primary delete-ok" type="submit">OK</a>
+                                                        </div>
+                                                      </div>  
                                                   <!-- end modal -->
 					</div>
 				</div><!--/span-->
@@ -136,6 +151,7 @@
 			</div><!--/row-->
                     </div>
           <!-- footer -->
-        <jsp:include page="res/footer.jsp"/>
+        <jsp:include page="res/footer.jsp"/>    
+        <script src="forms/form-usuario.js"></script>
     </body>   
 </html>
