@@ -10,6 +10,7 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 
 	<!-- jQuery -->
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>-->
 	<script src="res/js/jquery-1.7.2.min.js"></script>
 	<!-- jQuery UI -->
 	<script src="res/js/jquery-ui-1.8.21.custom.min.js"></script>
@@ -75,6 +76,12 @@
 
         <!-- Logout script -->
         <script src="res/js/logout.js"></script>
+
+        <script src="res/js/jquery.validationEngine-es.js" type="text/javascript" charset="utf-8"></script>
+        <script src="res/js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="forms/form-usuario.js"></script>
+        
         
 
 </footer>	

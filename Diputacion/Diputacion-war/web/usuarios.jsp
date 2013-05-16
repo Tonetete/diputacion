@@ -92,16 +92,14 @@
                                                           <h3>Editar Datos</h3>
                                                         </div>
 
-                                                        <div class="modal-body">
-                                                          <!-- The async form to send and replace the modals content with its response -->
-                                                          <form class="form-horizontal well" data-async data-target="#rating-modal" action="/usuarios" method="POST">
-                                                            <fieldset>
-                                                              <!-- form content --> 
-                                                              <h4 id="dni-h4" style="display:none;">DNI: </h4><input name="dni" id="dni" type="text" style="display:none;"  />
-                                                              <h4>Nombre: </h4><input name="nombre" id="nombre" type="text" />
-                                                              <h4>Apellidos: </h4><input name="apellidos" id="apellidos" type="text" />
-                                                              <h4>Contraseña: </h4><input name="contrasena" id="contrasena" type="text" />
-                                                              <h4>Email: </h4><input name="email" id="email" type="text" />
+                                                        <div class="modal-body">                                                          
+                                                          <form class="form-horizontal well" id="form-contact-usuario" data-async data-target="#rating-modal" action="/usuarios" method="POST">
+                                                            <fieldset>                                                              
+                                                              <h4 id="dni-h4" style="display:none;">DNI: </h4><input name="dni" class="validate[required]" id="dni" type="text" style="display:none;"  />
+                                                              <h4>Nombre: </h4><input name="nombre" class="validate[required]" id="nombre" type="text" />
+                                                              <h4>Apellidos: </h4><input name="apellidos" class="validate[required]" id="apellidos" type="text" />
+                                                              <h4>Contraseña: </h4><input name="contrasena" class="validate[required]" id="contrasena" type="text" />
+                                                              <h4>Email: </h4><input name="email" id="email" class="validate[required,custom[email]]" type="text" />
                                                               <h4>Diputacion: </h4><select name="diputacion" id="diputacion">
                                                                   <% List<Diputacion> diputaciones = (List<Diputacion>)request.getAttribute("listaDiputaciones");
                                                                     for(int i=0;i<diputaciones.size();i++){                                                                        
@@ -122,7 +120,7 @@
 
                                                         <div class="modal-footer">
                                                           <a href="#" class="btn" data-dismiss="modal">Cancel</a>
-                                                          <a href="#" class="btn btn-primary ok" type="submit">OK</a>
+                                                          <input href="#" class="btn btn-primary ok" type="submit" value="Ok"/>
                                                         </div>
                                                       </div>                                  
                 
@@ -145,6 +143,8 @@
                                                         </div>
                                                       </div>  
                                                   <!-- end modal -->
+                                                  
+                                                  
 					</div>
 				</div><!--/span-->
 			
@@ -152,6 +152,6 @@
                     </div>
           <!-- footer -->
         <jsp:include page="res/footer.jsp"/>    
-        <script src="forms/form-usuario.js"></script>
+          
     </body>   
 </html>

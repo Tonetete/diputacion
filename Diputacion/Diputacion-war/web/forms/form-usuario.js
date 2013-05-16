@@ -9,6 +9,47 @@ var fila_edit;
 var action;
 
 
+// Evento cuando se muestra el formulario
+$('body').on('shown','#form-usuario', function() {
+        $("input[name='dni']").focus();
+        $("#form-contact-usuario").validationEngine();
+//        $('#contact-form').validate(
+//        {
+//         rules: {
+//           dni: {
+//             minlength: 9,
+//             required: true
+//           },
+//           nombre: {
+//             minlength: 2,
+//             required: true
+//           },
+//           email: {
+//             required: true,
+//             email: true
+//           },
+//           subject: {
+//             minlength: 2,
+//             required: true
+//           },
+//           message: {
+//             minlength: 2,
+//             required: true
+//           }
+//         },
+//         highlight: function(element) {
+//           $(element).closest('.control-group').removeClass('success').addClass('error');
+//         },
+//         success: function(element) {
+//           element
+//           .text('OK!').addClass('valid')
+//           .closest('.control-group').removeClass('error').addClass('success');
+//         }
+//        });    
+    });
+
+//$("#form-usuario2").validationEngine();
+
     $('body').on('click','.delete-ok',function(){
         var dni = fila_edit.find('#dni').text();     
         var data = "&dni="+dni;
@@ -69,47 +110,45 @@ var action;
  
     
  /* Referente a la edición e inserción del usuario */
-    $('body').on('click','.ok',function(){      
-        $.ajax({
-            type: "POST",
-            url: "usuarios?action="+action,
-            data: $('.form-horizontal').serialize(),
-            dataType: "json",
-            async: false,
+    $('body').on('click','.ok',function(){   
+        if($("#form-contact-usuario").validationEngine('validate')===true){
+            $.ajax({
+                type: "POST",
+                url: "usuarios?action="+action,
+                data: $('.form-horizontal').serialize(),
+                dataType: "json",
+                async: false,
 
-            success: function(data, status) {
-                //$target.html(data);                                                                             
-                $('#form-usuario').modal('hide');
-                if(action === "edit"){
-                    fila_edit.siblings('#nombre').text(data.nombre);
-                    fila_edit.siblings('#apellidos').text(data.apellidos);
-                    fila_edit.siblings('#contrasena').text(data.contrasena);
-                    fila_edit.siblings('#diputacion').text(data.diputacion);
-                    fila_edit.siblings('#rol').text(data.rol);
-                    fila_edit.siblings('#email').text(data.email);
+                success: function(data, status) {
+                    //$target.html(data);                                                                             
+                    $('#form-usuario').modal('hide');
+                    if(action === "edit"){
+                        fila_edit.siblings('#nombre').text(data.nombre);
+                        fila_edit.siblings('#apellidos').text(data.apellidos);
+                        fila_edit.siblings('#contrasena').text(data.contrasena);
+                        fila_edit.siblings('#diputacion').text(data.diputacion);
+                        fila_edit.siblings('#rol').text(data.rol);
+                        fila_edit.siblings('#email').text(data.email);
+                    }
+                    else if(action === "insert"){
+                        var clonedRow = $(".table tr:nth-child(2)").clone(); //this will grab the first table row.
+                        clonedRow.find('#dni').text(data.dni);
+                        clonedRow.find('#nombre').text(data.nombre);
+                        clonedRow.find('#apellidos').text(data.apellidos);
+                        clonedRow.find('#contrasena').text(data.contrasena);
+                        clonedRow.find('#diputacion').text(data.diputacion);
+                        clonedRow.find('#rol').text(data.rol);
+                        clonedRow.find('#email').text(data.email);
+                        $(".table > tbody > tr:nth-child(1)").before(clonedRow);
+                        $(".table > tbody > tr:nth-child(1) td").effect("highlight", {}, 5500);                    
+                    }
+                },
+                error: function(textStatus){
+                  alert("Ha ocurrido un error actualizando o insertando el registro.");
                 }
-                else if(action === "insert"){
-                    var clonedRow = $(".table tr:nth-child(2)").clone(); //this will grab the first table row.
-                    clonedRow.find('#dni').text(data.dni);
-                    clonedRow.find('#nombre').text(data.nombre);
-                    clonedRow.find('#apellidos').text(data.apellidos);
-                    clonedRow.find('#contrasena').text(data.contrasena);
-                    clonedRow.find('#diputacion').text(data.diputacion);
-                    clonedRow.find('#rol').text(data.rol);
-                    clonedRow.find('#email').text(data.email);
-                    $(".table > tbody > tr:nth-child(1)").before(clonedRow);
-                    $(".table > tbody > tr:nth-child(1) td").effect("highlight", {}, 5500);                    
-                }
-            },
-            error: function(textStatus){
-              alert("Ha ocurrido un error actualizando o insertando el registro.");
-              //$('#form-usuario').modal('hide');
-            }
-        });
+            });
+        } 
 
         event.preventDefault();
 
   });
-
-
-

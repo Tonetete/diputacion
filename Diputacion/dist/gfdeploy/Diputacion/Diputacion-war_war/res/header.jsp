@@ -46,6 +46,7 @@
 	<link href='res/css/jquery.iphone.toggle.css' rel='stylesheet'>
 	<link href='res/css/opa-icons.css' rel='stylesheet'>
 	<link href='res/css/uploadify.css' rel='stylesheet'>
+        <link rel="stylesheet" href="res/css/validationEngine.jquery.css" type="text/css"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
         <title>Diputación</title>
