@@ -2,54 +2,28 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-//
-//    $('body').on('click','.delete', function () {alert("hola!");});
 
 var fila_edit;
 var action;
+var oTable;
+
+
 
 
 // Evento cuando se muestra el formulario
-$('body').on('shown','#form-usuario', function() {
-        $("input[name='dni']").focus();
-        $("#form-contact-usuario").validationEngine();
-//        $('#contact-form').validate(
-//        {
-//         rules: {
-//           dni: {
-//             minlength: 9,
-//             required: true
-//           },
-//           nombre: {
-//             minlength: 2,
-//             required: true
-//           },
-//           email: {
-//             required: true,
-//             email: true
-//           },
-//           subject: {
-//             minlength: 2,
-//             required: true
-//           },
-//           message: {
-//             minlength: 2,
-//             required: true
-//           }
-//         },
-//         highlight: function(element) {
-//           $(element).closest('.control-group').removeClass('success').addClass('error');
-//         },
-//         success: function(element) {
-//           element
-//           .text('OK!').addClass('valid')
-//           .closest('.control-group').removeClass('error').addClass('success');
-//         }
-//        });    
+    $('body').on('shown','#form-usuario', function() {
+            $("input[name='dni']").focus();
+            $("#form-contact-usuario").validationEngine();
+            // Evento que se dispara al insertar una fila nueva
+
+        });
+
+
+    
+    $('body').on('click','.delete',function(){
+        fila_edit = $(this).closest('tr');         
     });
-
-//$("#form-usuario2").validationEngine();
-
+    
     $('body').on('click','.delete-ok',function(){
         var dni = fila_edit.find('#dni').text();     
         var data = "&dni="+dni;
@@ -61,9 +35,9 @@ $('body').on('shown','#form-usuario', function() {
             async: false,
 
             success: function(data, status) {
-                $('#form-borrar-usuario').modal('hide');
-                fila_edit.remove();                
-            }           
+                $('#form-borrar-usuario').modal('hide');                
+                $('.datatable').dataTable().fnDeleteRow(fila_edit[0]);                                
+            }                      
             ,
             error: function(textStatus){
               alert("Ha ocurrido un error y no se ha podido eliminar el registro.");             
@@ -72,10 +46,6 @@ $('body').on('shown','#form-usuario', function() {
             
     
   });
-    
-    $('body').on('click','.delete',function(){
-        fila_edit = $(this).parent().parent();        
-    });
 
     /* Referente a la inserción del usuario */
     $('body').on('click','.insertar',function(){
@@ -131,16 +101,27 @@ $('body').on('shown','#form-usuario', function() {
                         fila_edit.siblings('#email').text(data.email);
                     }
                     else if(action === "insert"){
-                        var clonedRow = $(".table tr:nth-child(2)").clone(); //this will grab the first table row.
-                        clonedRow.find('#dni').text(data.dni);
-                        clonedRow.find('#nombre').text(data.nombre);
-                        clonedRow.find('#apellidos').text(data.apellidos);
-                        clonedRow.find('#contrasena').text(data.contrasena);
-                        clonedRow.find('#diputacion').text(data.diputacion);
-                        clonedRow.find('#rol').text(data.rol);
-                        clonedRow.find('#email').text(data.email);
-                        $(".table > tbody > tr:nth-child(1)").before(clonedRow);
-                        $(".table > tbody > tr:nth-child(1) td").effect("highlight", {}, 5500);                    
+                        var index = $(".datatable").dataTable().fnAddData( [
+                            data.dni,
+                            data.contrasena,
+                            data.nombre,
+                            data.apellidos,
+                            data.email,
+                            data.diputacion,
+                            data.rol,
+                            '<a data-toggle="modal" href="#form-usuario" class="btn btn-success edit"><i class="icon3-edit icon-white"></i>Editar</a>\n\
+                             <a data-toggle="modal" href="#form-borrar-usuario" class="btn btn-danger delete"><i class="icon3-trash icon-white"></i>Borrar</a>'
+                            ]);
+                        var tr = $(".datatable").dataTable().fnGetNodes(index[0]);
+                        $(".table > tbody > tr:nth-child("+tr.rowIndex+") td").effect("highlight", {}, 5500); 
+                        tr.cells[0].id="dni";
+                        tr.cells[1].id="contrasena";
+                        tr.cells[2].id="nombre";
+                        tr.cells[3].id="apellidos";
+                        tr.cells[4].id="email";
+                        tr.cells[5].id="diputacion";
+                        tr.cells[6].id="rol";
+                        $('.datatable').dataTable().fnReloadAjax();                        
                     }
                 },
                 error: function(textStatus){

@@ -10,7 +10,7 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 
 	<!-- jQuery -->
-        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 	<script src="res/js/jquery-1.7.2.min.js"></script>
 	<!-- jQuery UI -->
 	<script src="res/js/jquery-ui-1.8.21.custom.min.js"></script>
@@ -46,6 +46,8 @@
 	<script src='res/js/fullcalendar.min.js'></script>
 	<!-- data table plugin -->
 	<script src='res/js/jquery.dataTables.min.js'></script>
+	<!-- data table ajax reload plugin -->
+	<script src='res/js/jquery.datatableajax.js'></script>
 
 
 	<!-- select or dropdown enhancer -->
