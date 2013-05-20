@@ -27,7 +27,7 @@
                         <li><a class="ajax-link" href="main.jsp"><i class="icon2-home"></i><span class="hidden-tablet"> Principal</span></a></li>
                         <li><a class="ajax-link" href="listmovil.jsp"><i class="icon2-linea"></i><span class="hidden-tablet"> Líneas</span></a></li>
                         <li><a class="ajax-link" href="form.html"><i class="icon2-terminal"></i><span class="hidden-tablet"> Terminales</span></a></li>
-                        <li><a class="ajax-link" href="chart.html"><i class="icon2-gastos"></i><span class="hidden-tablet"> Gestión de Gastos</span></a></li>
+                        <li><a class="ajax-link" href="facturacion"><i class="icon2-gastos"></i><span class="hidden-tablet"> Gestión de Gastos</span></a></li>
                         <% if(rol.equals("administrador")){ %>
                         <li><a class="ajax-link" href="usuarios?action=list"><i class="icon2-user"></i><span class="hidden-tablet"> Gestión de Usuarios</span></a></li>
                         <%}%>
