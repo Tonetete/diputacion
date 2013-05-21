@@ -5,6 +5,7 @@
 package app.dao;
 
 import app.entity.Diputacion;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -32,5 +33,12 @@ public class DiputacionFacade extends AbstractFacade<Diputacion> {
         Query q = em.createNamedQuery("Diputacion.findByCiudad").setParameter("ciudad", ciudad);
         return (Diputacion)q.getSingleResult();
     }
+    
+    public List<String> getDiputacionAllCiudad(){
+        Query q = em.createQuery("SELECT d.ciudad FROM Diputacion d");
+        return (List<String>)q.getResultList();
+    }
+    
+    
     
 }

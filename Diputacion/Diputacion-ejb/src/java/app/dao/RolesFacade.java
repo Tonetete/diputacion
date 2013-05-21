@@ -6,6 +6,7 @@ package app.dao;
 
 import app.entity.Diputacion;
 import app.entity.Roles;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -32,6 +33,11 @@ public class RolesFacade extends AbstractFacade<Roles> {
     public Roles getRolByTipo(String tipo){
         Query q = em.createNamedQuery("Roles.findByTipo").setParameter("tipo", tipo);
         return (Roles)q.getSingleResult();
+    }
+    
+    public List<String> getRolAll(){
+        Query q = em.createQuery("SELECT r.tipo FROM Roles r");
+        return (List<String>)q.getResultList();
     }
     
 }

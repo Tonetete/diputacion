@@ -4,12 +4,15 @@
  */
 package app.bean;
 
+import app.dao.DiputacionFacade;
+import app.dao.RolesFacade;
 import app.dao.UsuarioFacade;
 import app.entity.Diputacion;
 import app.entity.GrupoRescate;
 import app.entity.Roles;
 import app.entity.Usuario;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -24,6 +27,10 @@ public class UsuariosBean {
     
     @EJB
     private UsuarioFacade usuarioFacade;
+    @EJB
+    private DiputacionFacade diputacionFacade;
+    @EJB
+    private RolesFacade rolesFacade;
     
     private String dni;
     private String nombre;
@@ -95,14 +102,14 @@ public class UsuariosBean {
         List<Usuario> listaUsuarios = (List<Usuario>)usuarioFacade.findAll();
         return listaUsuarios;
     }
-    
-    
-    
-    /**
-     * Creates a new instance of UsuariosBean
-     */
-    public UsuariosBean() {
+    @PostConstruct
+    public List<String> getListaDiputaciones(){
+        return diputacionFacade.getDiputacionAllCiudad();
     }
-    
+    @PostConstruct
+    public List<String> getListaRoles(){
+        return rolesFacade.getRolAll();
+    }
+
     
 }

@@ -77,6 +77,6 @@ public class LoginBean implements Serializable {
         // y en el javascript mostraremos el splash de error a través de p:commandbutton en login.xhtml
         json.add("usuariorol", jsonElem);
         RequestContext reqCtx = RequestContext.getCurrentInstance();
-        reqCtx.addCallbackParam("usuariorol", jsonElem.getAsInt());
+        reqCtx.addCallbackParam("usuariorol", -1);
     }
 }

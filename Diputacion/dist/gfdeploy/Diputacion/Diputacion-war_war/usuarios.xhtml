@@ -3,11 +3,12 @@
           xmlns:h="http://java.sun.com/jsf/html"
           xmlns:ui="http://java.sun.com/jsf/facelets"
           xmlns:p="http://primefaces.org/ui"
-          xmlns:c="http://java.sun.com/jsp/jstl/core">
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:f="http://java.sun.com/jsf/core">
 <h:head >
  <ui:include src="res/header.html"   />
 </h:head>
- <h:body> 
+ <body> 
    <ui:include src="res/header-menu.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"  />
      <!-- topbar ends -->      
        <div class="container-fluid">
@@ -22,10 +23,10 @@
 			<div>
 				<ul class="breadcrumb">
 					<li>
-						<a href="main.jsp">Principal</a> <span class="divider">/</span>
+						<a href="main.xtml">Principal</a> <span class="divider">/</span>
 					</li>
 					<li>
-						<a href="usuarios.jsp">Usuarios</a>
+						<a href="usuarios.xhtml">Usuarios</a>
 					</li>
 				</ul>
 			</div>
@@ -33,7 +34,7 @@
 			<div class="row-fluid sortable">		
 				<div class="box span12">
 					<div class="box-header well">
-						<h2><i class="icon-user"></i> Gestión de Usuarios</h2>
+						<h2><i class="icon-user"></i>Gestión de Usuarios</h2>
 						<div class="box-icon">
 							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
 							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
@@ -79,35 +80,28 @@
                                                           <h3>Editar Datos</h3>
                                                         </div>
 
-<!--                                                        <div class="modal-body">                                                          
-                                                          <form class="form-horizontal well" id="form-contact-usuario" data-async data-target="#rating-modal" action="/usuarios" method="POST">
+                                                        <div class="modal-body">                                                          
+                                                          <form class="form-horizontal well" data-async="" id="form-contact-usuario" data-target="#rating-modal" action="/usuarios" method="POST">
                                                             <fieldset>                                                              
                                                               <h4 id="dni-h4" style="display:none;">DNI: </h4><input name="dni" class="validate[required]" id="dni" type="text" style="display:none;"  />
                                                               <h4>Nombre: </h4><input name="nombre" class="validate[required]" id="nombre" type="text" />
                                                               <h4>Apellidos: </h4><input name="apellidos" class="validate[required]" id="apellidos" type="text" />
                                                               <h4>Contraseña: </h4><input name="contrasena" class="validate[required]" id="contrasena" type="text" />
                                                               <h4>Email: </h4><input name="email" id="email" class="validate[required,custom[email]]" type="text" />
-                                                              <h4>Diputacion: </h4><select name="diputacion" id="diputacion">
-                                                                  <% List<Diputacion> diputaciones = (List<Diputacion>)request.getAttribute("listaDiputaciones");
-                                                                    for(int i=0;i<diputaciones.size();i++){                                                                        
-                                                                        out.print("<option value='"+diputaciones.get(i).getCiudad()+"'>"+diputaciones.get(i).getCiudad()+"</value>");
-                                                                    }   
-                                                                  %>
-                                                              </select>
-                                                              <h4>Rol: </h4><select name="rol" id="rol">
-                                                                  <% List<Roles> roles = (List<Roles>)request.getAttribute("listaRoles");
-                                                                    for(int i=0;i<roles.size();i++){                                                                        
-                                                                       out.print("<option value='"+roles.get(i).getTipo()+"'>"+roles.get(i).getTipo()+"</value>");
-                                                                    }   
-                                                                  %>
-                                                              </select>                                                              
+                                                              <h4>Diputacion: </h4><h:selectOneMenu id="diputacion" value="#{usuariosBean.listaDiputaciones.get(0)}">
+                                                                                    <f:selectItems value="#{usuariosBean.listaDiputaciones}" /> 
+                                                                                    </h:selectOneMenu>                                                                  
+                                                              <h4>Rol: </h4><h:selectOneMenu id="rol" value="#{usuariosBean.listaRoles.get(0)}">
+                                                                               <f:selectItems value="#{usuariosBean.listaRoles}" /> 
+                                                                            </h:selectOneMenu>                                                                  
+                                                                                                                            
                                                             </fieldset>
                                                           </form>
-                                                        </div>-->
+                                                        </div>
 
                                                         <div class="modal-footer">
                                                           <a href="#" class="btn" data-dismiss="modal">Cancel</a>
-                                                          <input href="#" class="btn btn-primary ok" type="submit" value="Ok"/>
+                                                          <input class="btn btn-primary ok" type="submit" value="Ok"/>
                                                         </div>
                                                       </div>                                  
                 
@@ -141,7 +135,7 @@
          </div>
           <!-- footer -->
         <ui:include src="res/footer.xhtml"/>          
-    </h:body>   
+    </body>   
 </html>
                         
                         
