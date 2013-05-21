@@ -3,8 +3,15 @@
  * and open the template in the editor.
  */
 
+function checkLogin(xhr,status,args){
+        if(args.usuariorol === -1){
+            $('.errorMsg').fadeIn(500).delay(5000).fadeOut(500);
+        }
+ }
 
 $(document).ready(function(){
+    
+    
     //hide the loginbox and the error msg
     $('.loginBox').hide().fadeIn(1000);
     $('.errorMsg').hide();
@@ -31,37 +38,4 @@ $(document).ready(function(){
         }
     }); 
     
-    $("#login").click(function(e){          
-            
-           
-            var usuario = $("input#usuario").val(); 
-            var pass = $("input#contrasena").val(); 
-            dataString = "usuario=" + usuario+"&contrasena="+pass;
-
-            $.ajax({
-                type: "POST",
-                url: "LoginServlet",
-                data: dataString,
-                dataType: "json",
-                async: false,
-                
-                //if received a response from the server
-                success: function(data) {
-                    
-                    if(data.usuariorol === -1){
-                        $('.errorMsg').fadeIn(500).delay(5000).fadeOut(500);
-                    }
-                    else{
-                        document.getElementById("formLogin").action = "main.jsp";
-                        document.getElementById("formLogin").onsubmit = "return true";
-                    }
-                },
-                
-                //If there was no resonse from the server
-                error: function(jqXHR, textStatus, errorThrown){
-                     console.log("Something really bad happened " + textStatus);                      
-                }      
-      
-            });        
-    });
 });
