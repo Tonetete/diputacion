@@ -10,7 +10,9 @@
                         <li><a class="ajax-link" href="listmovil.jsp"><i class="icon2-linea"></i><span class="hidden-tablet"> Líneas</span></a></li>
                         <li><a class="ajax-link" href="form.html"><i class="icon2-terminal"></i><span class="hidden-tablet"> Terminales</span></a></li>
                         <li><a class="ajax-link" href="chart.html"><i class="icon2-gastos"></i><span class="hidden-tablet"> Gestión de Gastos</span></a></li>
-                        <li> <c:if  test="${rol == 'administrador'}"><a class="ajax-link" href="usuarios?action=list"><i class="icon2-user"></i><span class="hidden-tablet"> Gestión de Usuarios</span></a></c:if></li>
+                        <c:if test="${rol == 'administrador'}">
+                             <li><a class="ajax-link" href="usuarios.jsf"><i class="icon2-user"></i><span class="hidden-tablet"> Gestión de Usuarios</span></a></li>
+                        </c:if>
                         <li><a class="ajax-link" href="gallery.html"><i class="icon-picture"></i><span class="hidden-tablet"> Gallery</span></a></li>                        
                         
                 </ul>
