@@ -2403,8 +2403,8 @@ button.close {
 .btn-info:hover,
 .btn-inverse,
 .btn-inverse:hover {
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  color: #ffffff !important;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
 }
 .btn-primary.active,
 .btn-warning.active,
@@ -2419,18 +2419,18 @@ button.close {
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 .btn-primary {
-  background-color: #368bd7;
-  background-image: -moz-linear-gradient(top, #369bd7, #3673d7);
-  background-image: -ms-linear-gradient(top, #369bd7, #3673d7);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#369bd7), to(#3673d7));
-  background-image: -webkit-linear-gradient(top, #369bd7, #3673d7);
-  background-image: -o-linear-gradient(top, #369bd7, #3673d7);
-  background-image: linear-gradient(top, #369bd7, #3673d7);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#369bd7', endColorstr='#3673d7', GradientType=0);
-  border-color: #3673d7 #3673d7 #2050a1;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  *background-color: #3673d7;
+  background-color: #368bd7 !important;
+  background-image: -moz-linear-gradient(top, #369bd7, #3673d7) !important;
+  background-image: -ms-linear-gradient(top, #369bd7, #3673d7) !important;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#369bd7), to(#3673d7)) !important;
+  background-image: -webkit-linear-gradient(top, #369bd7, #3673d7) !important;
+  background-image: -o-linear-gradient(top, #369bd7, #3673d7) !important;
+  background-image: linear-gradient(top, #369bd7, #3673d7) !important;
+  background-repeat: repeat-x !important;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#369bd7', endColorstr='#3673d7', GradientType=0) !important;
+  border-color: #3673d7 #3673d7 #2050a1 !important; 
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25) !important;
+  *background-color: #3673d7 !important;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
 
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);

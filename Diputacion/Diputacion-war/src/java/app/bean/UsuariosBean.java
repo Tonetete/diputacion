@@ -11,11 +11,13 @@ import app.entity.Diputacion;
 import app.entity.GrupoRescate;
 import app.entity.Roles;
 import app.entity.Usuario;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -33,12 +35,13 @@ public class UsuariosBean {
     private RolesFacade rolesFacade;
     
     private String dni;
+    private String contrasena;   
     private String nombre;
     private String apellidos;
     private String email;
-    private Roles rol;
-    private Diputacion diputacion;
     private GrupoRescate rescate;
+    private Integer rol;
+    private Integer diputacion;
     
 
     public String getDni() {
@@ -49,6 +52,14 @@ public class UsuariosBean {
         this.dni = dni;
     }
 
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+    
     public String getNombre() {
         return nombre;
     }
@@ -73,19 +84,19 @@ public class UsuariosBean {
         this.email = email;
     }
 
-    public Roles getRol() {
+    public Integer getRol() {
         return rol;
     }
 
-    public void setRol(Roles rol) {
+    public void setRol(Integer rol) {
         this.rol = rol;
     }
 
-    public Diputacion getDiputacion() {
+    public Integer getDiputacion() {
         return diputacion;
     }
 
-    public void setDiputacion(Diputacion diputacion) {
+    public void setDiputacion(Integer diputacion) {
         this.diputacion = diputacion;
     }
 
@@ -103,12 +114,52 @@ public class UsuariosBean {
         return listaUsuarios;
     }
     @PostConstruct
-    public List<String> getListaDiputaciones(){
-        return diputacionFacade.getDiputacionAllCiudad();
+    public List<Diputacion> getListaDiputaciones(){
+        return diputacionFacade.findAll();
     }
+
     @PostConstruct
-    public List<String> getListaRoles(){
-        return rolesFacade.getRolAll();
+    public List<Roles> getListaRoles(){
+        return rolesFacade.findAll();
+    }
+    
+    public void insertar(){
+        GrupoRescate gr = new GrupoRescate();
+        gr.setCodigo(1);
+        Diputacion d = diputacionFacade.find(diputacion);
+        Roles r = rolesFacade.find(rol);
+        Usuario u = new Usuario();
+        u.setDni(dni);
+        u.setNombre(nombre);
+        u.setApellidos(apellidos);
+        u.setContrasena(contrasena);
+        u.setEmail(email);
+        u.setCodigoRescate(gr);
+        u.setCodigoDip(d);
+        u.setCodigoRol(r);
+        
+        if(usuarioFacade.find(u.getDni())==null){
+            usuarioFacade.insert(u);  
+        }
+        else{
+            usuarioFacade.edit(u);
+        }
+        
+        RequestContext reqCtx = RequestContext.getCurrentInstance();
+        reqCtx.addCallbackParam("dni", dni);
+        reqCtx.addCallbackParam("contrasena", contrasena);
+        reqCtx.addCallbackParam("nombre", nombre);
+        reqCtx.addCallbackParam("apellidos", apellidos);        
+        reqCtx.addCallbackParam("email", email);        
+        reqCtx.addCallbackParam("diputacion", u.getCodigoDip().getCiudad());
+        reqCtx.addCallbackParam("rol", u.getCodigoRol().getTipo());        
+    }
+    
+    public void borrar(){
+        
+        Usuario u = new Usuario();
+        u = (Usuario)usuarioFacade.find(dni);
+        usuarioFacade.delete(u);
     }
 
     

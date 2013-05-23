@@ -24,6 +24,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
+
+
 /**
  *
  * @author Tone
@@ -42,7 +44,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Llamada.findByInicio", query = "SELECT l FROM Llamada l WHERE l.inicio = :inicio"),
     @NamedQuery(name = "Llamada.findByFin", query = "SELECT l FROM Llamada l WHERE l.fin = :fin")})
 public class Llamada implements Serializable {
-    private static final long serialVersionUID = 1L;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "coste")
+    private BigDecimal coste;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -60,11 +66,6 @@ public class Llamada implements Serializable {
     @NotNull
     @Column(name = "duracion")
     private int duracion;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "coste")
-    private BigDecimal coste;
     @Column(name = "inicio")
     @Temporal(TemporalType.TIMESTAMP)
     private Date inicio;
@@ -121,14 +122,6 @@ public class Llamada implements Serializable {
         this.duracion = duracion;
     }
 
-    public BigDecimal getCoste() {
-        return coste;
-    }
-
-    public void setCoste(BigDecimal coste) {
-        this.coste = coste;
-    }
-
     public Date getInicio() {
         return inicio;
     }
@@ -177,5 +170,26 @@ public class Llamada implements Serializable {
     public String toString() {
         return "app.entity.Llamada[ codigo=" + codigo + " ]";
     }
+
+    public Llamada(Linea codigoNumero) {
+        this.codigoNumero = codigoNumero;
+    }
+
+    public Llamada(Linea codigoNumero, BigDecimal coste) {
+        this.codigoNumero = codigoNumero;
+        this.coste = coste;
+    }
+
+    public BigDecimal getCoste() {
+        return coste;
+    }
+
+    public void setCoste(BigDecimal coste) {
+        this.coste = coste;
+    }
+
+    
+
+    
     
 }

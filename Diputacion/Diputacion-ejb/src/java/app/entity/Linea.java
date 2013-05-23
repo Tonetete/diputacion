@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -37,6 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Linea.findByPeriodoFacturacion", query = "SELECT l FROM Linea l WHERE l.periodoFacturacion = :periodoFacturacion"),
     @NamedQuery(name = "Linea.findByPublico", query = "SELECT l FROM Linea l WHERE l.publico = :publico")})
 public class Linea implements Serializable {
+//    @OneToOne(cascade = CascadeType.ALL, mappedBy = "linea")
+//    private Llamada llamada;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "linea")
     private Collection<AsignacionFijo> asignacionFijoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "linea")
@@ -166,5 +169,13 @@ public class Linea implements Serializable {
     public void setAsignacionMovilCollection(Collection<AsignacionMovil> asignacionMovilCollection) {
         this.asignacionMovilCollection = asignacionMovilCollection;
     }
+
+//    public Llamada getLlamada() {
+//        return llamada;
+//    }
+//
+//    public void setLlamada(Llamada llamada) {
+//        this.llamada = llamada;
+//    }
     
 }

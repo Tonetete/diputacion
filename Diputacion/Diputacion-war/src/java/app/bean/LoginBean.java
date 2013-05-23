@@ -68,6 +68,7 @@ public class LoginBean implements Serializable {
             ExternalContext context = facesContext.getExternalContext();  
             HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
             FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            FacesContext.getCurrentInstance().getExternalContext().setResponseContentType(contrasena);
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", u);
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("rol", u.getCodigoRol().getTipo());
             context.redirect("main.jsf");
@@ -75,7 +76,7 @@ public class LoginBean implements Serializable {
         
         // Si el usuario es nulo, no existe, por lo tanto enviaremos los datos a través de json
         // y en el javascript mostraremos el splash de error a través de p:commandbutton en login.xhtml
-        json.add("usuariorol", jsonElem);
+        //json.add("usuariorol", jsonElem);
         RequestContext reqCtx = RequestContext.getCurrentInstance();
         reqCtx.addCallbackParam("usuariorol", -1);
     }
