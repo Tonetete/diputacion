@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -31,13 +32,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Perfil.findAll", query = "SELECT p FROM Perfil p"),
     @NamedQuery(name = "Perfil.findByCodigo", query = "SELECT p FROM Perfil p WHERE p.codigo = :codigo"),
     @NamedQuery(name = "Perfil.findByDescripcion", query = "SELECT p FROM Perfil p WHERE p.descripcion = :descripcion"),
-    @NamedQuery(name = "Perfil.findBySaldoLimite", query = "SELECT p FROM Perfil p WHERE p.saldoLimite = :saldoLimite")})
+    @NamedQuery(name = "Perfil.findBySaldoLimite", query = "SELECT p FROM Perfil p WHERE p.saldoLimite = :saldoLimite"),
+    @NamedQuery(name = "Perfil.findByCoste", query = "SELECT p FROM Perfil p WHERE p.coste = :coste")})
 public class Perfil implements Serializable {
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "coste")
-    private BigDecimal coste;
-    @OneToMany(mappedBy = "codigoPerfil")
-    private Collection<Tarea> tareaCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -49,7 +46,12 @@ public class Perfil implements Serializable {
     private String descripcion;
     @Column(name = "saldo_limite")
     private Long saldoLimite;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "coste")
+    private BigDecimal coste;
     @OneToMany(mappedBy = "codigoPerfil")
+    private Collection<Tarea> tareaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoPerfil")
     private Collection<AsignacionMovil> asignacionMovilCollection;
 
     public Perfil() {
@@ -81,6 +83,23 @@ public class Perfil implements Serializable {
 
     public void setSaldoLimite(Long saldoLimite) {
         this.saldoLimite = saldoLimite;
+    }
+
+    public BigDecimal getCoste() {
+        return coste;
+    }
+
+    public void setCoste(BigDecimal coste) {
+        this.coste = coste;
+    }
+
+    @XmlTransient
+    public Collection<Tarea> getTareaCollection() {
+        return tareaCollection;
+    }
+
+    public void setTareaCollection(Collection<Tarea> tareaCollection) {
+        this.tareaCollection = tareaCollection;
     }
 
     @XmlTransient
@@ -115,23 +134,6 @@ public class Perfil implements Serializable {
     @Override
     public String toString() {
         return "app.entity.Perfil[ codigo=" + codigo + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Tarea> getTareaCollection() {
-        return tareaCollection;
-    }
-
-    public void setTareaCollection(Collection<Tarea> tareaCollection) {
-        this.tareaCollection = tareaCollection;
-    }
-
-    public BigDecimal getCoste() {
-        return coste;
-    }
-
-    public void setCoste(BigDecimal coste) {
-        this.coste = coste;
     }
     
 }

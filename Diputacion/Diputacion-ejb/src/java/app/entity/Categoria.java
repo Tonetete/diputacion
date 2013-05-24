@@ -31,13 +31,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c"),
     @NamedQuery(name = "Categoria.findByCodigo", query = "SELECT c FROM Categoria c WHERE c.codigo = :codigo"),
-    @NamedQuery(name = "Categoria.findByDescripcion", query = "SELECT c FROM Categoria c WHERE c.descripcion = :descripcion")})
+    @NamedQuery(name = "Categoria.findByDescripcion", query = "SELECT c FROM Categoria c WHERE c.descripcion = :descripcion"),
+    @NamedQuery(name = "Categoria.findByCoste", query = "SELECT c FROM Categoria c WHERE c.coste = :coste")})
 public class Categoria implements Serializable {
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "coste")
-    private BigDecimal coste;
-    @OneToMany(mappedBy = "codigoCategoria")
-    private Collection<Tarea> tareaCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -47,8 +43,13 @@ public class Categoria implements Serializable {
     @Size(max = 300)
     @Column(name = "descripcion")
     private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria")
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "coste")
+    private BigDecimal coste;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoCat")
     private Collection<AsignacionFijo> asignacionFijoCollection;
+    @OneToMany(mappedBy = "codigoCategoria")
+    private Collection<Tarea> tareaCollection;
 
     public Categoria() {
     }
@@ -73,6 +74,14 @@ public class Categoria implements Serializable {
         this.descripcion = descripcion;
     }
 
+    public BigDecimal getCoste() {
+        return coste;
+    }
+
+    public void setCoste(BigDecimal coste) {
+        this.coste = coste;
+    }
+
     @XmlTransient
     public Collection<AsignacionFijo> getAsignacionFijoCollection() {
         return asignacionFijoCollection;
@@ -80,6 +89,15 @@ public class Categoria implements Serializable {
 
     public void setAsignacionFijoCollection(Collection<AsignacionFijo> asignacionFijoCollection) {
         this.asignacionFijoCollection = asignacionFijoCollection;
+    }
+
+    @XmlTransient
+    public Collection<Tarea> getTareaCollection() {
+        return tareaCollection;
+    }
+
+    public void setTareaCollection(Collection<Tarea> tareaCollection) {
+        this.tareaCollection = tareaCollection;
     }
 
     @Override
@@ -105,23 +123,6 @@ public class Categoria implements Serializable {
     @Override
     public String toString() {
         return "app.entity.Categoria[ codigo=" + codigo + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Tarea> getTareaCollection() {
-        return tareaCollection;
-    }
-
-    public void setTareaCollection(Collection<Tarea> tareaCollection) {
-        this.tareaCollection = tareaCollection;
-    }
-
-    public BigDecimal getCoste() {
-        return coste;
-    }
-
-    public void setCoste(BigDecimal coste) {
-        this.coste = coste;
     }
     
 }

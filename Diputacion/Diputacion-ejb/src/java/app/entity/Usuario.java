@@ -32,17 +32,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
     @NamedQuery(name = "Usuario.findByDni", query = "SELECT u FROM Usuario u WHERE u.dni = :dni"),
+    @NamedQuery(name = "Usuario.findByContrasena", query = "SELECT u FROM Usuario u WHERE u.contrasena = :contrasena"),
     @NamedQuery(name = "Usuario.findByNombre", query = "SELECT u FROM Usuario u WHERE u.nombre = :nombre"),
     @NamedQuery(name = "Usuario.findByApellidos", query = "SELECT u FROM Usuario u WHERE u.apellidos = :apellidos"),
     @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email")})
 public class Usuario implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dniTareaAsignado")
-    private Collection<Tarea> tareaCollection;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "contrasena")
-    private String contrasena;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -50,6 +44,11 @@ public class Usuario implements Serializable {
     @Size(min = 1, max = 9)
     @Column(name = "dni")
     private String dni;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "contrasena")
+    private String contrasena;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
@@ -66,18 +65,20 @@ public class Usuario implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "email")
     private String email;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dni")
     private Collection<AsignacionFijo> asignacionFijoCollection;
     @JoinColumn(name = "codigo_rol", referencedColumnName = "codigo")
     @ManyToOne(optional = false)
     private Roles codigoRol;
-    @JoinColumn(name = "codigo_dip", referencedColumnName = "codigo")
-    @ManyToOne
-    private Diputacion codigoDip;
     @JoinColumn(name = "codigo_rescate", referencedColumnName = "codigo")
     @ManyToOne(optional = false)
     private GrupoRescate codigoRescate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    @JoinColumn(name = "codigo_dip", referencedColumnName = "codigo")
+    @ManyToOne
+    private Diputacion codigoDip;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dniTareaAsignado")
+    private Collection<Tarea> tareaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dni")
     private Collection<AsignacionMovil> asignacionMovilCollection;
 
     public Usuario() {
@@ -87,8 +88,9 @@ public class Usuario implements Serializable {
         this.dni = dni;
     }
 
-    public Usuario(String dni, String nombre, String apellidos, String email) {
+    public Usuario(String dni, String contrasena, String nombre, String apellidos, String email) {
         this.dni = dni;
+        this.contrasena = contrasena;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.email = email;
@@ -100,6 +102,14 @@ public class Usuario implements Serializable {
 
     public void setDni(String dni) {
         this.dni = dni;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     public String getNombre() {
@@ -143,6 +153,14 @@ public class Usuario implements Serializable {
         this.codigoRol = codigoRol;
     }
 
+    public GrupoRescate getCodigoRescate() {
+        return codigoRescate;
+    }
+
+    public void setCodigoRescate(GrupoRescate codigoRescate) {
+        this.codigoRescate = codigoRescate;
+    }
+
     public Diputacion getCodigoDip() {
         return codigoDip;
     }
@@ -151,12 +169,13 @@ public class Usuario implements Serializable {
         this.codigoDip = codigoDip;
     }
 
-    public GrupoRescate getCodigoRescate() {
-        return codigoRescate;
+    @XmlTransient
+    public Collection<Tarea> getTareaCollection() {
+        return tareaCollection;
     }
 
-    public void setCodigoRescate(GrupoRescate codigoRescate) {
-        this.codigoRescate = codigoRescate;
+    public void setTareaCollection(Collection<Tarea> tareaCollection) {
+        this.tareaCollection = tareaCollection;
     }
 
     @XmlTransient
@@ -191,23 +210,6 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "app.entity.Usuario[ dni=" + dni + " ]";
-    }
-
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
-
-    @XmlTransient
-    public Collection<Tarea> getTareaCollection() {
-        return tareaCollection;
-    }
-
-    public void setTareaCollection(Collection<Tarea> tareaCollection) {
-        this.tareaCollection = tareaCollection;
     }
     
 }

@@ -54,21 +54,21 @@ public class Tarea implements Serializable {
     @JoinColumn(name = "tipo_tarea", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private TipoTarea tipoTarea;
+    @JoinColumn(name = "dni_tarea_asignado", referencedColumnName = "dni")
+    @ManyToOne(optional = false)
+    private Usuario dniTareaAsignado;
     @JoinColumn(name = "codigo_terminal", referencedColumnName = "codigo")
     @ManyToOne
     private Terminal codigoTerminal;
+    @JoinColumn(name = "codigo_perfil", referencedColumnName = "codigo")
+    @ManyToOne
+    private Perfil codigoPerfil;
     @JoinColumn(name = "codigo_numero", referencedColumnName = "codigo")
     @ManyToOne
     private Linea codigoNumero;
     @JoinColumn(name = "codigo_categoria", referencedColumnName = "codigo")
     @ManyToOne
     private Categoria codigoCategoria;
-    @JoinColumn(name = "codigo_perfil", referencedColumnName = "codigo")
-    @ManyToOne
-    private Perfil codigoPerfil;
-    @JoinColumn(name = "dni_tarea_asignado", referencedColumnName = "dni")
-    @ManyToOne(optional = false)
-    private Usuario dniTareaAsignado;
 
     public Tarea() {
     }
@@ -122,12 +122,28 @@ public class Tarea implements Serializable {
         this.tipoTarea = tipoTarea;
     }
 
+    public Usuario getDniTareaAsignado() {
+        return dniTareaAsignado;
+    }
+
+    public void setDniTareaAsignado(Usuario dniTareaAsignado) {
+        this.dniTareaAsignado = dniTareaAsignado;
+    }
+
     public Terminal getCodigoTerminal() {
         return codigoTerminal;
     }
 
     public void setCodigoTerminal(Terminal codigoTerminal) {
         this.codigoTerminal = codigoTerminal;
+    }
+
+    public Perfil getCodigoPerfil() {
+        return codigoPerfil;
+    }
+
+    public void setCodigoPerfil(Perfil codigoPerfil) {
+        this.codigoPerfil = codigoPerfil;
     }
 
     public Linea getCodigoNumero() {
@@ -144,22 +160,6 @@ public class Tarea implements Serializable {
 
     public void setCodigoCategoria(Categoria codigoCategoria) {
         this.codigoCategoria = codigoCategoria;
-    }
-
-    public Perfil getCodigoPerfil() {
-        return codigoPerfil;
-    }
-
-    public void setCodigoPerfil(Perfil codigoPerfil) {
-        this.codigoPerfil = codigoPerfil;
-    }
-
-    public Usuario getDniTareaAsignado() {
-        return dniTareaAsignado;
-    }
-
-    public void setDniTareaAsignado(Usuario dniTareaAsignado) {
-        this.dniTareaAsignado = dniTareaAsignado;
     }
 
     @Override

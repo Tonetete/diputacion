@@ -5,12 +5,12 @@
 package app.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -30,69 +31,63 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "AsignacionMovil.findAll", query = "SELECT a FROM AsignacionMovil a"),
+    @NamedQuery(name = "AsignacionMovil.findByAsignado", query = "SELECT a FROM AsignacionMovil a WHERE a.asignado = :asignado"),
+    @NamedQuery(name = "AsignacionMovil.findByCoste", query = "SELECT a FROM AsignacionMovil a WHERE a.coste = :coste"),
     @NamedQuery(name = "AsignacionMovil.findByFechaAsignacion", query = "SELECT a FROM AsignacionMovil a WHERE a.fechaAsignacion = :fechaAsignacion"),
     @NamedQuery(name = "AsignacionMovil.findByFechaFin", query = "SELECT a FROM AsignacionMovil a WHERE a.fechaFin = :fechaFin"),
-    @NamedQuery(name = "AsignacionMovil.findByDni", query = "SELECT a FROM AsignacionMovil a WHERE a.asignacionMovilPK.dni = :dni"),
-    @NamedQuery(name = "AsignacionMovil.findByCodigoNumero", query = "SELECT a FROM AsignacionMovil a WHERE a.asignacionMovilPK.codigoNumero = :codigoNumero"),
-    @NamedQuery(name = "AsignacionMovil.findByCodigoTerminal", query = "SELECT a FROM AsignacionMovil a WHERE a.asignacionMovilPK.codigoTerminal = :codigoTerminal")})
+    @NamedQuery(name = "AsignacionMovil.findByCodigo", query = "SELECT a FROM AsignacionMovil a WHERE a.codigo = :codigo")})
 public class AsignacionMovil implements Serializable {
-
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "coste")
-    private BigDecimal coste;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "asignado")
-    private char asignado;
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected AsignacionMovilPK asignacionMovilPK;
-    @Basic(optional = false)
-    @NotNull
+    @Column(name = "asignado")
+    private Character asignado;
+    @Column(name = "coste")
+    private BigInteger coste;
     @Column(name = "fecha_asignacion")
     @Temporal(TemporalType.DATE)
     private Date fechaAsignacion;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "fecha_fin")
     @Temporal(TemporalType.DATE)
     private Date fechaFin;
-    @JoinColumn(name = "codigo_terminal", referencedColumnName = "codigo", insertable = false, updatable = false)
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "codigo")
+    private String codigo;
+    @JoinColumn(name = "dni", referencedColumnName = "dni")
     @ManyToOne(optional = false)
-    private Terminal terminal;
-    @JoinColumn(name = "dni", referencedColumnName = "dni", insertable = false, updatable = false)
+    private Usuario dni;
+    @JoinColumn(name = "codigo_terminal", referencedColumnName = "codigo")
     @ManyToOne(optional = false)
-    private Usuario usuario;
+    private Terminal codigoTerminal;
     @JoinColumn(name = "codigo_perfil", referencedColumnName = "codigo")
-    @ManyToOne
-    private Perfil codigoPerfil;
-    @JoinColumn(name = "codigo_numero", referencedColumnName = "codigo", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Linea linea;
+    private Perfil codigoPerfil;
+    @JoinColumn(name = "codigo_numero", referencedColumnName = "codigo")
+    @ManyToOne(optional = false)
+    private Linea codigoNumero;
 
     public AsignacionMovil() {
     }
 
-    public AsignacionMovil(AsignacionMovilPK asignacionMovilPK) {
-        this.asignacionMovilPK = asignacionMovilPK;
+    public AsignacionMovil(String codigo) {
+        this.codigo = codigo;
     }
 
-    public AsignacionMovil(AsignacionMovilPK asignacionMovilPK, Date fechaAsignacion, Date fechaFin) {
-        this.asignacionMovilPK = asignacionMovilPK;
-        this.fechaAsignacion = fechaAsignacion;
-        this.fechaFin = fechaFin;
+    public Character getAsignado() {
+        return asignado;
     }
 
-    public AsignacionMovil(String dni, int codigoNumero, int codigoTerminal) {
-        this.asignacionMovilPK = new AsignacionMovilPK(dni, codigoNumero, codigoTerminal);
+    public void setAsignado(Character asignado) {
+        this.asignado = asignado;
     }
 
-    public AsignacionMovilPK getAsignacionMovilPK() {
-        return asignacionMovilPK;
+    public BigInteger getCoste() {
+        return coste;
     }
 
-    public void setAsignacionMovilPK(AsignacionMovilPK asignacionMovilPK) {
-        this.asignacionMovilPK = asignacionMovilPK;
+    public void setCoste(BigInteger coste) {
+        this.coste = coste;
     }
 
     public Date getFechaAsignacion() {
@@ -111,20 +106,28 @@ public class AsignacionMovil implements Serializable {
         this.fechaFin = fechaFin;
     }
 
-    public Terminal getTerminal() {
-        return terminal;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setTerminal(Terminal terminal) {
-        this.terminal = terminal;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Usuario getDni() {
+        return dni;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setDni(Usuario dni) {
+        this.dni = dni;
+    }
+
+    public Terminal getCodigoTerminal() {
+        return codigoTerminal;
+    }
+
+    public void setCodigoTerminal(Terminal codigoTerminal) {
+        this.codigoTerminal = codigoTerminal;
     }
 
     public Perfil getCodigoPerfil() {
@@ -135,18 +138,18 @@ public class AsignacionMovil implements Serializable {
         this.codigoPerfil = codigoPerfil;
     }
 
-    public Linea getLinea() {
-        return linea;
+    public Linea getCodigoNumero() {
+        return codigoNumero;
     }
 
-    public void setLinea(Linea linea) {
-        this.linea = linea;
+    public void setCodigoNumero(Linea codigoNumero) {
+        this.codigoNumero = codigoNumero;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (asignacionMovilPK != null ? asignacionMovilPK.hashCode() : 0);
+        hash += (codigo != null ? codigo.hashCode() : 0);
         return hash;
     }
 
@@ -157,7 +160,7 @@ public class AsignacionMovil implements Serializable {
             return false;
         }
         AsignacionMovil other = (AsignacionMovil) object;
-        if ((this.asignacionMovilPK == null && other.asignacionMovilPK != null) || (this.asignacionMovilPK != null && !this.asignacionMovilPK.equals(other.asignacionMovilPK))) {
+        if ((this.codigo == null && other.codigo != null) || (this.codigo != null && !this.codigo.equals(other.codigo))) {
             return false;
         }
         return true;
@@ -165,24 +168,7 @@ public class AsignacionMovil implements Serializable {
 
     @Override
     public String toString() {
-        return "app.entity.AsignacionMovil[ asignacionMovilPK=" + asignacionMovilPK + " ]";
-    }
-
-
-    public BigDecimal getCoste() {
-        return coste;
-    }
-
-    public void setCoste(BigDecimal coste) {
-        this.coste = coste;
-    }
-
-    public char getAsignado() {
-        return asignado;
-    }
-
-    public void setAsignado(char asignado) {
-        this.asignado = asignado;
+        return "app.entity.AsignacionMovil[ codigo=" + codigo + " ]";
     }
     
 }

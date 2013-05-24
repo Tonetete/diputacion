@@ -43,8 +43,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Terminal.findByPedido", query = "SELECT t FROM Terminal t WHERE t.pedido = :pedido"),
     @NamedQuery(name = "Terminal.findByProduct", query = "SELECT t FROM Terminal t WHERE t.product = :product")})
 public class Terminal implements Serializable {
-    @OneToMany(mappedBy = "codigoTerminal")
-    private Collection<Tarea> tareaCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -81,9 +79,11 @@ public class Terminal implements Serializable {
     private String product;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoTerminal")
     private Collection<AsignacionFijo> asignacionFijoCollection;
+    @OneToMany(mappedBy = "codigoTerminal")
+    private Collection<Tarea> tareaCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoTerminal")
     private Collection<Rma> rmaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "terminal")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoTerminal")
     private Collection<AsignacionMovil> asignacionMovilCollection;
 
     public Terminal() {
@@ -188,6 +188,15 @@ public class Terminal implements Serializable {
     }
 
     @XmlTransient
+    public Collection<Tarea> getTareaCollection() {
+        return tareaCollection;
+    }
+
+    public void setTareaCollection(Collection<Tarea> tareaCollection) {
+        this.tareaCollection = tareaCollection;
+    }
+
+    @XmlTransient
     public Collection<Rma> getRmaCollection() {
         return rmaCollection;
     }
@@ -228,15 +237,6 @@ public class Terminal implements Serializable {
     @Override
     public String toString() {
         return "app.entity.Terminal[ codigo=" + codigo + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Tarea> getTareaCollection() {
-        return tareaCollection;
-    }
-
-    public void setTareaCollection(Collection<Tarea> tareaCollection) {
-        this.tareaCollection = tareaCollection;
     }
     
 }

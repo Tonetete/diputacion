@@ -9,8 +9,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -32,20 +32,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "AsignacionFijo.findAll", query = "SELECT a FROM AsignacionFijo a"),
     @NamedQuery(name = "AsignacionFijo.findByFechaAsignacion", query = "SELECT a FROM AsignacionFijo a WHERE a.fechaAsignacion = :fechaAsignacion"),
     @NamedQuery(name = "AsignacionFijo.findByFechaFin", query = "SELECT a FROM AsignacionFijo a WHERE a.fechaFin = :fechaFin"),
-    @NamedQuery(name = "AsignacionFijo.findByDni", query = "SELECT a FROM AsignacionFijo a WHERE a.asignacionFijoPK.dni = :dni"),
-    @NamedQuery(name = "AsignacionFijo.findByCodigoNumero", query = "SELECT a FROM AsignacionFijo a WHERE a.asignacionFijoPK.codigoNumero = :codigoNumero"),
-    @NamedQuery(name = "AsignacionFijo.findByCodigoCat", query = "SELECT a FROM AsignacionFijo a WHERE a.asignacionFijoPK.codigoCat = :codigoCat")})
+    @NamedQuery(name = "AsignacionFijo.findByCodigo", query = "SELECT a FROM AsignacionFijo a WHERE a.codigo = :codigo"),
+    @NamedQuery(name = "AsignacionFijo.findByCoste", query = "SELECT a FROM AsignacionFijo a WHERE a.coste = :coste"),
+    @NamedQuery(name = "AsignacionFijo.findByAsignado", query = "SELECT a FROM AsignacionFijo a WHERE a.asignado = :asignado")})
 public class AsignacionFijo implements Serializable {
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "coste")
-    private BigDecimal coste;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "asignado")
-    private char asignado;
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected AsignacionFijoPK asignacionFijoPK;
     @Basic(optional = false)
     @NotNull
     @Column(name = "fecha_asignacion")
@@ -56,42 +47,43 @@ public class AsignacionFijo implements Serializable {
     @Column(name = "fecha_fin")
     @Temporal(TemporalType.DATE)
     private Date fechaFin;
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "codigo")
+    private Long codigo;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "coste")
+    private BigDecimal coste;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "asignado")
+    private char asignado;
+    @JoinColumn(name = "dni", referencedColumnName = "dni")
+    @ManyToOne(optional = false)
+    private Usuario dni;
     @JoinColumn(name = "codigo_terminal", referencedColumnName = "codigo")
     @ManyToOne(optional = false)
     private Terminal codigoTerminal;
-    @JoinColumn(name = "codigo_cat", referencedColumnName = "codigo", insertable = false, updatable = false)
+    @JoinColumn(name = "codigo_numero", referencedColumnName = "codigo")
     @ManyToOne(optional = false)
-    private Categoria categoria;
-    @JoinColumn(name = "dni", referencedColumnName = "dni", insertable = false, updatable = false)
+    private Linea codigoNumero;
+    @JoinColumn(name = "codigo_cat", referencedColumnName = "codigo")
     @ManyToOne(optional = false)
-    private Usuario usuario;
-    @JoinColumn(name = "codigo_numero", referencedColumnName = "codigo", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Linea linea;
+    private Categoria codigoCat;
 
     public AsignacionFijo() {
     }
 
-    public AsignacionFijo(AsignacionFijoPK asignacionFijoPK) {
-        this.asignacionFijoPK = asignacionFijoPK;
+    public AsignacionFijo(Long codigo) {
+        this.codigo = codigo;
     }
 
-    public AsignacionFijo(AsignacionFijoPK asignacionFijoPK, Date fechaAsignacion, Date fechaFin) {
-        this.asignacionFijoPK = asignacionFijoPK;
+    public AsignacionFijo(Long codigo, Date fechaAsignacion, Date fechaFin, char asignado) {
+        this.codigo = codigo;
         this.fechaAsignacion = fechaAsignacion;
         this.fechaFin = fechaFin;
-    }
-
-    public AsignacionFijo(String dni, int codigoNumero, int codigoCat) {
-        this.asignacionFijoPK = new AsignacionFijoPK(dni, codigoNumero, codigoCat);
-    }
-
-    public AsignacionFijoPK getAsignacionFijoPK() {
-        return asignacionFijoPK;
-    }
-
-    public void setAsignacionFijoPK(AsignacionFijoPK asignacionFijoPK) {
-        this.asignacionFijoPK = asignacionFijoPK;
+        this.asignado = asignado;
     }
 
     public Date getFechaAsignacion() {
@@ -110,61 +102,12 @@ public class AsignacionFijo implements Serializable {
         this.fechaFin = fechaFin;
     }
 
-    public Terminal getCodigoTerminal() {
-        return codigoTerminal;
+    public Long getCodigo() {
+        return codigo;
     }
 
-    public void setCodigoTerminal(Terminal codigoTerminal) {
-        this.codigoTerminal = codigoTerminal;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public Linea getLinea() {
-        return linea;
-    }
-
-    public void setLinea(Linea linea) {
-        this.linea = linea;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (asignacionFijoPK != null ? asignacionFijoPK.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof AsignacionFijo)) {
-            return false;
-        }
-        AsignacionFijo other = (AsignacionFijo) object;
-        if ((this.asignacionFijoPK == null && other.asignacionFijoPK != null) || (this.asignacionFijoPK != null && !this.asignacionFijoPK.equals(other.asignacionFijoPK))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "app.entity.AsignacionFijo[ asignacionFijoPK=" + asignacionFijoPK + " ]";
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
     }
 
     public BigDecimal getCoste() {
@@ -181,6 +124,63 @@ public class AsignacionFijo implements Serializable {
 
     public void setAsignado(char asignado) {
         this.asignado = asignado;
+    }
+
+    public Usuario getDni() {
+        return dni;
+    }
+
+    public void setDni(Usuario dni) {
+        this.dni = dni;
+    }
+
+    public Terminal getCodigoTerminal() {
+        return codigoTerminal;
+    }
+
+    public void setCodigoTerminal(Terminal codigoTerminal) {
+        this.codigoTerminal = codigoTerminal;
+    }
+
+    public Linea getCodigoNumero() {
+        return codigoNumero;
+    }
+
+    public void setCodigoNumero(Linea codigoNumero) {
+        this.codigoNumero = codigoNumero;
+    }
+
+    public Categoria getCodigoCat() {
+        return codigoCat;
+    }
+
+    public void setCodigoCat(Categoria codigoCat) {
+        this.codigoCat = codigoCat;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (codigo != null ? codigo.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof AsignacionFijo)) {
+            return false;
+        }
+        AsignacionFijo other = (AsignacionFijo) object;
+        if ((this.codigo == null && other.codigo != null) || (this.codigo != null && !this.codigo.equals(other.codigo))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "app.entity.AsignacionFijo[ codigo=" + codigo + " ]";
     }
     
 }

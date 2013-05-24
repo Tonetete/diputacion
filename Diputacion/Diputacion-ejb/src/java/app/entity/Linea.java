@@ -15,7 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -38,14 +37,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Linea.findByPeriodoFacturacion", query = "SELECT l FROM Linea l WHERE l.periodoFacturacion = :periodoFacturacion"),
     @NamedQuery(name = "Linea.findByPublico", query = "SELECT l FROM Linea l WHERE l.publico = :publico")})
 public class Linea implements Serializable {
-//    @OneToOne(cascade = CascadeType.ALL, mappedBy = "linea")
-//    private Llamada llamada;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "linea")
-    private Collection<AsignacionFijo> asignacionFijoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "linea")
-    private Collection<AsignacionMovil> asignacionMovilCollection;
-    @OneToMany(mappedBy = "codigoNumero")
-    private Collection<Tarea> tareaCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -63,7 +54,13 @@ public class Linea implements Serializable {
     @Column(name = "publico")
     private Character publico;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoNumero")
+    private Collection<AsignacionFijo> asignacionFijoCollection;
+    @OneToMany(mappedBy = "codigoNumero")
+    private Collection<Tarea> tareaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoNumero")
     private Collection<Llamada> llamadaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoNumero")
+    private Collection<AsignacionMovil> asignacionMovilCollection;
 
     public Linea() {
     }
@@ -110,12 +107,39 @@ public class Linea implements Serializable {
     }
 
     @XmlTransient
+    public Collection<AsignacionFijo> getAsignacionFijoCollection() {
+        return asignacionFijoCollection;
+    }
+
+    public void setAsignacionFijoCollection(Collection<AsignacionFijo> asignacionFijoCollection) {
+        this.asignacionFijoCollection = asignacionFijoCollection;
+    }
+
+    @XmlTransient
+    public Collection<Tarea> getTareaCollection() {
+        return tareaCollection;
+    }
+
+    public void setTareaCollection(Collection<Tarea> tareaCollection) {
+        this.tareaCollection = tareaCollection;
+    }
+
+    @XmlTransient
     public Collection<Llamada> getLlamadaCollection() {
         return llamadaCollection;
     }
 
     public void setLlamadaCollection(Collection<Llamada> llamadaCollection) {
         this.llamadaCollection = llamadaCollection;
+    }
+
+    @XmlTransient
+    public Collection<AsignacionMovil> getAsignacionMovilCollection() {
+        return asignacionMovilCollection;
+    }
+
+    public void setAsignacionMovilCollection(Collection<AsignacionMovil> asignacionMovilCollection) {
+        this.asignacionMovilCollection = asignacionMovilCollection;
     }
 
     @Override
@@ -142,40 +166,5 @@ public class Linea implements Serializable {
     public String toString() {
         return "app.entity.Linea[ codigo=" + codigo + " ]";
     }
-
-    @XmlTransient
-    public Collection<Tarea> getTareaCollection() {
-        return tareaCollection;
-    }
-
-    public void setTareaCollection(Collection<Tarea> tareaCollection) {
-        this.tareaCollection = tareaCollection;
-    }
-
-    @XmlTransient
-    public Collection<AsignacionFijo> getAsignacionFijoCollection() {
-        return asignacionFijoCollection;
-    }
-
-    public void setAsignacionFijoCollection(Collection<AsignacionFijo> asignacionFijoCollection) {
-        this.asignacionFijoCollection = asignacionFijoCollection;
-    }
-
-    @XmlTransient
-    public Collection<AsignacionMovil> getAsignacionMovilCollection() {
-        return asignacionMovilCollection;
-    }
-
-    public void setAsignacionMovilCollection(Collection<AsignacionMovil> asignacionMovilCollection) {
-        this.asignacionMovilCollection = asignacionMovilCollection;
-    }
-
-//    public Llamada getLlamada() {
-//        return llamada;
-//    }
-//
-//    public void setLlamada(Llamada llamada) {
-//        this.llamada = llamada;
-//    }
     
 }
