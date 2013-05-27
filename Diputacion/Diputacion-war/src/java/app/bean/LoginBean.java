@@ -70,7 +70,7 @@ public class LoginBean implements Serializable {
             FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             FacesContext.getCurrentInstance().getExternalContext().setResponseContentType(contrasena);
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", u);
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("rol", u.getCodigoRol().getTipo());
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("rol", u.getCodigoRol().getTipo());           
             context.redirect("main.jsf");
         }
         

@@ -17,6 +17,10 @@
           <from-outcome>usuarios</from-outcome>  
           <to-view-id>/usuarios.xhtml</to-view-id>  
       </navigation-case>  
+      <navigation-case>  
+          <from-outcome>terminales</from-outcome>  
+          <to-view-id>/listmovil.xhtml</to-view-id>  
+      </navigation-case>  
     </navigation-rule>
     <lifecycle>
         <phase-listener>app.bean.AuthenticationListener</phase-listener>

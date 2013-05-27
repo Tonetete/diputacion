@@ -1,13 +1,20 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:c="http://java.sun.com/jsp/jstl/core"
-      xmlns:f="http://java.sun.com/jsf/core">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:ui="http://java.sun.com/jsf/facelets"
+          xmlns:p="http://primefaces.org/ui"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+    <ui:include src="res/header.html"   />
+</h:head>
     <h:body>
+        #{listterminalesBean.serUser(usuario)}
+        <ui:include src="res/header-menu.xhtml"  />
+        <!-- left menu starts -->
+                <ui:include src="res/sidebar.xhtml"/>
+                <!-- left menu ends -->
         <c:if test="#{listterminalesBean.user.codigoRol.codigo=='4'}">
         <h:dataTable var="o" value="#{listterminalesBean.asignF}">
             <c:when test="#{listterminalesBean.user.dni.equals(o.usuario.dni)}">
@@ -23,7 +30,7 @@
         
         <c:if test="#{listterminalesBean.user.codigoRol.codigo=='3'}">
         <h:dataTable var="o" value="#{listterminalesBean.asignF}">        
-            <c:when test="#{o.usuario.codigoRol.codigo >=3 && o.usuario.codigoDip.codigo == listterminalesBean.user.codigoDip.codigo}">
+            <c:when test="#{(o.dni.codigoRol.codigo >=3) and (o.usuario.codigoDip.codigo == listterminalesBean.user.codigoDip.codigo)}">
                 <f:facet name="header">
                     <h:outputText value="Usuario" />
                 </f:facet>
@@ -47,7 +54,7 @@
                 
         <c:if test="#{listterminalesBean.user.codigoRol.codigo=='2'}">
         <h:dataTable var="o" value="#{listterminalesBean.asignF}">        
-            <c:when test="#{o.usuario.codigoRol.codigo >=2 && o.usuario.codigoDip.codigo == listterminalesBean.user.codigoDip.codigo}">
+            <c:when test="#{(o.usuario.codigoRol.codigo >=2) and (o.usuario.codigoDip.codigo == listterminalesBean.user.codigoDip.codigo)}">
                 <f:facet name="header">
                     <h:outputText value="Usuario" />
                 </f:facet>
@@ -73,31 +80,37 @@
         </h:dataTable>
         </c:if> 
             
-            <c:if test="#{listterminalesBean.user.codigoRol.codigo=='1'}">
-            <h:dataTable var="o" value="#{listterminalesBean.asignF}">                    
+            <c:if test="#{listterminalesBean.user.codigoRol.codigo==1}">
+            <h:dataTable var="o" value="#{listterminalesBean.asignF}">  
+               <h:column> 
                 <f:facet name="header">
                     <h:outputText value="Usuario" />
                 </f:facet>
-                    <h:outputText value="#{o.usuario.dni}"/>
-                
+                    <h:outputText value="#{o.dni.dni}"/>
+               </h:column>
+                <h:column> 
                 <f:facet name="header">
                     <h:outputText value="Nº linea" />
                 </f:facet>
-                    <h:outputText value="#{o.linea.numero}"/>
-                    
+                    <h:outputText value="#{o.codigoNumero.numero}"/>
+                 </h:column>    
+                <h:column> 
                 <f:facet name="header">
                     <h:outputText value="Departamento" />
                 </f:facet>
-                    <h:outputText value="#{o.usuario.codigoDip.codigo}"/>
-                    
+                    <h:outputText value="#{o.dni.codigoDip.codigo}"/>
+                </h:column>  
+                <h:column> 
                 <f:facet name="header">
                     <h:outputText value="Diputacion" />
                 </f:facet>
-                    <h:outputText value="#{o.usuario.codigoDip.ciudad}"/>    
-                
-                <f:selectItem value="#{o.linea.codigo}"/>
+                    <h:outputText value="#{o.dni.codigoDip.ciudad}"/>    
+                </h:column> 
+                <f:selectItem value="#{o.codigoNumero.codigo}"/>
         </h:dataTable>
         </c:if> 
+                <!-- footer -->
+        <ui:include src="res/footer.xhtml"/>          
     </h:body>
 </html>
 

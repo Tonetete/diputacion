@@ -41,6 +41,7 @@ public class ListterminalesBean {
     
     public List<AsignacionFijo> getAsignF()
     {
+        List<AsignacionFijo> fjo = asigfF.findAll();
         return asigfF.findAll();
     }
     public void setAsignFijo(List<AsignacionFijo> a)
