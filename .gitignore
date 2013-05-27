@@ -5,5 +5,9 @@
 /Diputacion/Diputacion-ejb/setup/
 /Diputacion/Diputacion-war/build/
 /Diputacion/Diputacion-ejb/dist/
+/Diputacion/Diputacion-ejb/nbproject/
+/Diputacion/Diputacion-ejb/setup/
+/Diputacion/Diputacion-ejb/build.xml
+/Diputacion/Diputacion-war/build.xml
 /Diputacion/build/
 /Diputacion/Diputacion-war/dist/
