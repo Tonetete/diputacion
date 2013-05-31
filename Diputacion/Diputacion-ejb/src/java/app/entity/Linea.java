@@ -5,12 +5,19 @@
 package app.entity;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -39,8 +46,8 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Linea implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "codigo")
     private Integer codigo;
     @Basic(optional = false)
@@ -88,6 +95,12 @@ public class Linea implements Serializable {
 
     public void setNumero(String numero) {
         this.numero = numero;
+    }
+    
+    public String getFechaFact(){ 
+        SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+        String f = formateador.format(periodoFacturacion);
+        return f;
     }
 
     public Date getPeriodoFacturacion() {

@@ -64,7 +64,7 @@ function checkCRUD(xhr, status, args){
 
 
 // Evento cuando se muestra el formulario
-    $('body').on('shown','#form-usuario', function() {
+    $('body').on('shown','#form-contact-usuario', function() {
             $("input[name='form-contact-usuario:dni-form']").focus();
             $("#form-contact-usuario").validationEngine();
             // Evento que se dispara al insertar una fila nueva
@@ -109,32 +109,6 @@ function checkCRUD(xhr, status, args){
         $("input[name='form-contact-borrar:dni-form']").val($(this).parent().siblings('.dni').text());        
     });
     
-     $('body').on('click','.delete-ok',function(){
-         
-     });
-    
-//    $('body').on('click','.delete-ok',function(){
-//        var dni = fila_edit.find('#dni').text();     
-//        var data = "&dni="+dni;
-//        $.ajax({
-//            type: "POST",
-//            url: "usuarios?action=delete",
-//            data:data,
-//            dataType: "json",
-//            async: false,
-//
-//            success: function(data, status) {
-//                $('#form-borrar-usuario').modal('hide');                
-//                $('.datatable').dataTable().fnDeleteRow(fila_edit[0]);                                
-//            }                      
-//            ,
-//            error: function(textStatus){
-//              alert("Ha ocurrido un error y no se ha podido eliminar el registro.");             
-//            }
-//        });
-            
-    
-//  });
 
    
  

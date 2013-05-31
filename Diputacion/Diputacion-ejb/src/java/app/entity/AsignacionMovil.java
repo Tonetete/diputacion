@@ -19,7 +19,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -51,9 +50,8 @@ public class AsignacionMovil implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "codigo")
-    private String codigo;
+    private Long codigo;
     @JoinColumn(name = "dni", referencedColumnName = "dni")
     @ManyToOne(optional = false)
     private Usuario dni;
@@ -70,7 +68,7 @@ public class AsignacionMovil implements Serializable {
     public AsignacionMovil() {
     }
 
-    public AsignacionMovil(String codigo) {
+    public AsignacionMovil(Long codigo) {
         this.codigo = codigo;
     }
 
@@ -106,11 +104,11 @@ public class AsignacionMovil implements Serializable {
         this.fechaFin = fechaFin;
     }
 
-    public String getCodigo() {
+    public Long getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(Long codigo) {
         this.codigo = codigo;
     }
 

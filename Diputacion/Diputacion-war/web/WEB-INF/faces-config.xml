@@ -18,6 +18,10 @@
           <to-view-id>/usuarios.xhtml</to-view-id>  
       </navigation-case>  
       <navigation-case>  
+          <from-outcome>lineas</from-outcome>  
+          <to-view-id>/lineas.xhtml</to-view-id>  
+      </navigation-case>  
+      <navigation-case>  
           <from-outcome>terminales</from-outcome>  
           <to-view-id>/listmovil.xhtml</to-view-id>  
       </navigation-case>  
@@ -34,15 +38,5 @@
         <exception-type>javax.faces.application.ViewExpiredException</exception-type>
         <location>/login.xhtml</location>
     </error-page>
-    
-    <filter>
-        <filter-name>requestEncodeFilter</filter-name>
-        <filter-class>RequestEncodeFilter</filter-class>
-    </filter>
-
-    <filter-mapping>
-        <filter-name>requestEncodeFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
 
 </faces-config>
