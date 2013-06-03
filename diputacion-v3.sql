@@ -4,7 +4,7 @@ USE `diputacion`;
 --
 -- Host: localhost    Database: diputacion
 -- ------------------------------------------------------
--- Server version	5.6.10
+-- Server version 5.6.10
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -68,7 +68,7 @@ CREATE TABLE `ASIGNACION_MOVIL` (
   `coste` decimal(38,0) DEFAULT NULL,
   `fecha_asignacion` date DEFAULT NULL,
   `fecha_fin` date DEFAULT NULL,
-  `codigo` varchar(45) NOT NULL,
+  `codigo` bigint(20) NOT NULL,
   `codigo_terminal` int(11) NOT NULL,
   `codigo_numero` int(11) NOT NULL,
   `dni` varchar(255) NOT NULL,
@@ -102,7 +102,7 @@ DROP TABLE IF EXISTS `CATEGORIA`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `CATEGORIA` (
-  `codigo` int(11) NOT NULL,
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(300) DEFAULT NULL,
   `coste` decimal(4,2) DEFAULT NULL,
   PRIMARY KEY (`codigo`)
@@ -127,7 +127,7 @@ DROP TABLE IF EXISTS `DIPUTACION`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `DIPUTACION` (
-  `codigo` int(11) NOT NULL,
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
   `direccion` varchar(300) NOT NULL,
   `telefono` varchar(20) DEFAULT NULL,
   `cod_postal` varchar(9) DEFAULT NULL,
@@ -154,7 +154,7 @@ DROP TABLE IF EXISTS `GRUPO_RESCATE`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `GRUPO_RESCATE` (
-  `codigo` int(11) NOT NULL,
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
   PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -178,7 +178,7 @@ DROP TABLE IF EXISTS `LINEA`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `LINEA` (
-  `codigo` int(11) NOT NULL,
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
   `numero` varchar(40) NOT NULL,
   `periodo_facturacion` date DEFAULT NULL,
   `publico` char(1) DEFAULT NULL,
@@ -205,7 +205,7 @@ DROP TABLE IF EXISTS `LLAMADA`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `LLAMADA` (
-  `codigo` bigint(20) NOT NULL AUTO_INCREMENT,
+  `codigo` bigint(20) NOT NULL,
   `codigo_numero` int(11) NOT NULL,
   `numero_destino` varchar(40) NOT NULL,
   `tipo` varchar(40) DEFAULT NULL,
@@ -261,7 +261,7 @@ DROP TABLE IF EXISTS `PERFIL`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `PERFIL` (
-  `codigo` int(11) NOT NULL,
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(300) DEFAULT NULL,
   `saldo_limite` decimal(10,0) DEFAULT NULL,
   `coste` decimal(4,2) DEFAULT NULL,
@@ -348,7 +348,7 @@ DROP TABLE IF EXISTS `ROLES`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ROLES` (
-  `codigo` int(11) NOT NULL,
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
   `tipo` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -409,7 +409,7 @@ DROP TABLE IF EXISTS `TERMINAL`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `TERMINAL` (
-  `codigo` int(11) NOT NULL,
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
   `fecha_alta` date DEFAULT NULL,
   `fecha_baja` date DEFAULT NULL,
   `marca` varchar(40) DEFAULT NULL,
@@ -443,7 +443,7 @@ DROP TABLE IF EXISTS `TIPO_TAREA`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `TIPO_TAREA` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -491,7 +491,7 @@ CREATE TABLE `USUARIO` (
 
 LOCK TABLES `USUARIO` WRITE;
 /*!40000 ALTER TABLE `USUARIO` DISABLE KEYS */;
-INSERT INTO `USUARIO` VALUES ('0','qwe','Antonio','Fuentes','toneterivas@gmail.com',1,1,1),('03082054P','1234454','Jesús','Cristo De la Repolla','jcruzfreire@gmail.com',1,1,1),('13163532B','1234','María José','Márques Martínez','mjosemarques@gmail.com',1,2,2),('16867684J','1234','María Dolores','González Fernández','mgonzalezfernandez@gmail.com',1,8,2),('19650728B','1234','Mercedes','Rufo Sánchez','mrufosanchez@gmail.com',1,7,3),('19998743J','1234','Marta','Sola Taylor','msolataylor@gmail.com',3,4,4),('29002943N','1234','Marta','Gil Montserrat','mgilmontserrat@gmail.com',4,6,4),('30370939Z','1234','María Jesús','Ramos Macia','mramosmacia@gmail.com',5,7,2),('34182948A','1234','Antonio','Navarro	Sánchez','anavarrosanchez@gmail.com',2,7,4),('34529080P','1234','Antonio','Otero De Juan','aoterodejuan@gmail.com',1,1,1),('36060096Y','1234','Ramón','Alfonso González','ralfonsogonzalez@gmail.com',3,6,3),('38615781T','1234','Carmen','Salgado Prieto','csalgadoprieto@gmail.com',1,4,2),('39124960M','1234','Rosario','Trujillo López','rtrujillo@gmail.com',2,6,2),('39957941H','1234','Jesús','Aparicio Carpio','japaricio@gmail.com',5,5,3),('44103398R','1234','Gloria','Del Castillo Etxebarria','gcastillo@gmail.com',4,5,2),('59133396M','1234','Beatriz','Sánchez	Barrena','bsanchezbarrena@gmail.com',1,5,4),('62626527B','1234','Pedro','García Ruano','pgarciaruano@gmail.com',5,3,4),('63719306Z','1234','María Dolores','González Bernal','mgonzalezbernal@gmail.com',3,3,2),('71946976D','1234','Juan','Romero Tello','jromerotello@gmail.com',1,7,1),('84018843G','1234','Marta','Cortés Paños','mcortespaños@gmail.com',3,1,3),('85698664C','1234','Raquel','Nicolás Juárez','rnicolas@gmail.com',2,2,4),('87404617V','1234','María Carmen','Casanova Soriano','mcasanovasoriano@gmail.com',5,8,4),('87787332N','1234','Francisco','Suárez Miro','fsuarezmiro@gmail.com',4,3,3),('93147298N','1234','José Miguel','Sancho Espínola','jsancho@gmail.com',2,4,3),('93164374E','1234','María Teresa','Vázquez Álvarez','mvazquezalvarez@gmail.com',4,8,3),('99097605N','1234','Ángeles','Pardo Llanos','apardollanos@gmail.com',1,2,3);
+INSERT INTO `USUARIO` VALUES ('0','qwe','Antonio','Fuentes','toneterivas@gmail.com',1,1,1),('03082054P','1234454','Jesús','Cristo De la Repolla','jcruzfreire@gmail.com',1,1,1),('13163532B','1234','María José','Márques Martínez','mjosemarques@gmail.com',1,2,2),('16867684J','1234','María Dolores','González Fernández','mgonzalezfernandez@gmail.com',1,8,2),('19650728B','1234','Mercedes','Rufo Sánchez','mrufosanchez@gmail.com',1,7,3),('19998743J','1234','Marta','Sola Taylor','msolataylor@gmail.com',3,4,4),('29002943N','1234','Marta','Gil Montserrat','mgilmontserrat@gmail.com',4,6,4),('30370939Z','1234','María Jesús','Ramos Macia','mramosmacia@gmail.com',5,7,2),('34182948A','1234','Antonio','Navarro  Sánchez','anavarrosanchez@gmail.com',2,7,4),('34529080P','1234','Antonio','Otero De Juan','aoterodejuan@gmail.com',1,1,1),('36060096Y','1234','Ramón','Alfonso González','ralfonsogonzalez@gmail.com',3,6,3),('38615781T','1234','Carmen','Salgado Prieto','csalgadoprieto@gmail.com',1,4,2),('39124960M','1234','Rosario','Trujillo López','rtrujillo@gmail.com',2,6,2),('39957941H','1234','Jesús','Aparicio Carpio','japaricio@gmail.com',5,5,3),('44103398R','1234','Gloria','Del Castillo Etxebarria','gcastillo@gmail.com',4,5,2),('59133396M','1234','Beatriz','Sánchez  Barrena','bsanchezbarrena@gmail.com',1,5,4),('62626527B','1234','Pedro','García Ruano','pgarciaruano@gmail.com',5,3,4),('63719306Z','1234','María Dolores','González Bernal','mgonzalezbernal@gmail.com',3,3,2),('71946976D','1234','Juan','Romero Tello','jromerotello@gmail.com',1,7,1),('84018843G','1234','Marta','Cortés Paños','mcortespaños@gmail.com',3,1,3),('85698664C','1234','Raquel','Nicolás Juárez','rnicolas@gmail.com',2,2,4),('87404617V','1234','María Carmen','Casanova Soriano','mcasanovasoriano@gmail.com',5,8,4),('87787332N','1234','Francisco','Suárez Miro','fsuarezmiro@gmail.com',4,3,3),('93147298N','1234','José Miguel','Sancho Espínola','jsancho@gmail.com',2,4,3),('93164374E','1234','María Teresa','Vázquez Álvarez','mvazquezalvarez@gmail.com',4,8,3),('99097605N','1234','Ángeles','Pardo Llanos','apardollanos@gmail.com',1,2,3);
 /*!40000 ALTER TABLE `USUARIO` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
