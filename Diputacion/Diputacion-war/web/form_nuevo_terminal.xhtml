@@ -1,0 +1,156 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:ui="http://java.sun.com/jsf/facelets"
+          xmlns:p="http://primefaces.org/ui"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:f="http://java.sun.com/jsf/core">
+<h:head >
+ <ui:include src="res/header.html"   />
+</h:head>
+ <h:body> 
+   <ui:include src="res/header-menu.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"  />
+     <!-- topbar ends -->      
+       <div class="container-fluid">
+            <div class="row-fluid">
+				
+                <!-- left menu starts -->
+                <ui:include src="res/sidebar.xhtml"/>
+                <!-- left menu ends -->
+                <div id="content" class="span10">
+			<!-- content starts -->		
+
+			<div>
+				<ul class="breadcrumb">
+					<li>
+						<a href="main.jsp">Principal</a> <span class="divider">/</span>
+					</li>
+					<li>
+						<a href="listarTerminales.jsf">Asignaciones</a> <span class="divider">/</span>
+					</li>
+					<li>
+						<a href="listarTerminalesM.jsf">Asignaciones móviles</a> <span class="divider">/</span>
+					</li>
+                                        <li>
+						<a href="#">Solicitar móvil nuevo</a>
+					</li>
+				</ul>
+			</div>
+			
+			<div class="row-fluid sortable">		
+                            <div class="box span12">
+				<div class="box-header well">
+                                    <h2><i class="icon-user"></i> Formulario de solicitud. Móvil nuevo</h2>
+					<div class="box-icon">
+                                            <a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+                                            <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+                                            <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+                                           <!-- Ponerlo bonito --> <a class="ajax-link" href="listarTerminalesM.jsf"><span class="hidden-tablet">Volver</span></a>  
+					</div>
+				</div>
+			<div class="box-content">
+                        <!-- Comienzo formulario -->
+
+                        <h:form>
+                            <h2>Escoge el terminal que quieras</h2>
+                            Tipo tarea:
+                            <h:selectOneMenu value="#{anadirTarea.id_TipoTarea}">
+                                <f:selectItems value="#{anadirTarea.listaTipoTarea}" var="p" itemLabel="#{p.nombre}" itemValue="#{p.id}"/>
+                            </h:selectOneMenu><br/>
+                            Tipo de tarifa:
+                            <h:selectOneMenu value="#{anadirTarea.id_Tarifa}">
+                                <f:selectItems value="#{anadirTarea.listaPerfiles}" var="p" itemLabel="#{p.descripcion}" itemValue="#{p.codigo}"/>
+                            </h:selectOneMenu><br/>
+                            Tipo de categoría:
+                            <h:selectOneMenu value="#{anadirTarea.id_Categoria}">
+                                <f:selectItems value="#{anadirTarea.listaCategorias}" var="c" itemLabel="#{c.descripcion}" itemValue="#{c.codigo}"/>
+                            </h:selectOneMenu><br/>
+                            Número de teléfono:
+                            <h:selectOneMenu value="#{anadirTarea.id_Numero}" disabled="true">
+                                <f:selectItems value="#{anadirTarea.listaLineas}" var="l" itemLabel="#{l.numero}" itemValue="#{l.codigo}"/>
+                            </h:selectOneMenu><br/>
+                            Tipo de teléfono:
+                            <h:selectOneMenu value="#{anadirTarea.id_Telefono}">
+                                <f:selectItems value="#{anadirTarea.listaTerminal}" var="t" itemLabel="#{t.marca} #{t.modelo}" itemValue="#{t.codigo}"/>
+                            </h:selectOneMenu><br/>
+                            Validación:
+                            <h:inputText id="validado" value="Sin validar" disabled="true"></h:inputText><br/>
+
+                            <h:commandButton action="#{anadirTarea.insertarTarea()}" value="ENVIAR" class="btn btn-success edit" />
+                        </h:form>
+
+                        <!-- Fin formulario -->
+
+                              <!-- Bootstrap trigger to open modal -->
+                              <div class="hide fade modal" id="form-usuario">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal">×</button>
+                                      <h3>Editar Datos</h3>
+                                    </div>
+
+<!--                                                        <div class="modal-body">                                                          
+                                                          <form class="form-horizontal well" id="form-contact-usuario" data-async data-target="#rating-modal" action="/usuarios" method="POST">
+                                                            <fieldset>                                                              
+                                                              <h4 id="dni-h4" style="display:none;">DNI: </h4><input name="dni" class="validate[required]" id="dni" type="text" style="display:none;"  />
+                                                              <h4>Nombre: </h4><input name="nombre" class="validate[required]" id="nombre" type="text" />
+                                                              <h4>Apellidos: </h4><input name="apellidos" class="validate[required]" id="apellidos" type="text" />
+                                                              <h4>Contraseña: </h4><input name="contrasena" class="validate[required]" id="contrasena" type="text" />
+                                                              <h4>Email: </h4><input name="email" id="email" class="validate[required,custom[email]]" type="text" />
+                                                              <h4>Diputacion: </h4><select name="diputacion" id="diputacion">
+                                                                  <% List<Diputacion> diputaciones = (List<Diputacion>)request.getAttribute("listaDiputaciones");
+                                                                    for(int i=0;i<diputaciones.size();i++){                                                                        
+                                                                        out.print("<option value='"+diputaciones.get(i).getCiudad()+"'>"+diputaciones.get(i).getCiudad()+"</value>");
+                                                                    }   
+                                                                  %>
+                                                              </select>
+                                                              <h4>Rol: </h4><select name="rol" id="rol">
+                                                                  <% List<Roles> roles = (List<Roles>)request.getAttribute("listaRoles");
+                                                                    for(int i=0;i<roles.size();i++){
+                                                                       out.print("<option value='"+roles.get(i).getTipo()+"'>"+roles.get(i).getTipo()+"</value>");
+                                                                    }   
+                                                                  %>
+                                                              </select>
+                                                            </fieldset>
+                                                          </form>
+                                                        </div>-->
+
+                                                        <div class="modal-footer">
+                                                          <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+                                                          <input href="#" class="btn btn-primary ok" type="submit" value="Ok"/>
+                                                        </div>
+                                                      </div>                                  
+                
+                                                    
+                                                  <!-- end modal -->
+                                                  <!-- Bootstrap trigger to open modal -->
+                                                  <div class="hide fade modal" id="form-borrar-usuario">
+                                                        <div class="modal-header">
+                                                          <button type="button" class="close" data-dismiss="modal">×</button>
+                                                          <h3>Borrar Datos</h3>
+                                                        </div>
+
+                                                        <div class="modal-body">
+                                                            <p>Estás apunto de borrar el registro. ¿Desea seguir?</p>
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                          <a href="#" class="btn" data-dismiss="modal">Cancelar</a>
+                                                          <a href="#" class="btn btn-primary delete-ok" type="submit">OK</a>
+                                                        </div>
+                                                      </div>  
+                                                  <!-- end modal -->
+                                                  
+                                                  
+					</div>
+				</div><!--/span-->
+			
+			</div><!--/row-->
+                    </div>
+            </div>
+         </div>
+          <!-- footer -->
+        <ui:include src="res/footer.xhtml"/>
+    </h:body>   
+</html>
+
+

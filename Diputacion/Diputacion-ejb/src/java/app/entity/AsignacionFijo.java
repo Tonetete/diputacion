@@ -6,6 +6,7 @@ package app.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -88,6 +89,17 @@ public class AsignacionFijo implements Serializable {
 
     public Date getFechaAsignacion() {
         return fechaAsignacion;
+    }
+    public String getFechaIniStr(){ 
+        SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+        String f = formateador.format(fechaAsignacion);
+        return f;
+    }
+    
+    public String getFechaFinStr(){ 
+        SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+        String f = formateador.format(fechaFin);
+        return f;
     }
 
     public void setFechaAsignacion(Date fechaAsignacion) {

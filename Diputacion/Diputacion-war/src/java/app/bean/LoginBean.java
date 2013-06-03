@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.primefaces.context.RequestContext;
 
@@ -80,4 +81,13 @@ public class LoginBean implements Serializable {
         RequestContext reqCtx = RequestContext.getCurrentInstance();
         reqCtx.addCallbackParam("usuariorol", -1);
     }
+    
+    public void deslogear() throws IOException{
+        ExternalContext ectx = FacesContext.getCurrentInstance().getExternalContext();
+        HttpServletResponse response = (HttpServletResponse)ectx.getResponse();
+        HttpSession session = (HttpSession)ectx.getSession(false);
+        session.invalidate();
+
+        response.sendRedirect("login.jsf");        
+  }
 }

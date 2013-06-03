@@ -5,9 +5,11 @@
 package app.dao;
 
 import app.entity.TipoTarea;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -26,5 +28,11 @@ public class TipoTareaFacade extends AbstractFacade<TipoTarea> {
     public TipoTareaFacade() {
         super(TipoTarea.class);
     }
+
+    public List<TipoTarea> getTipoTareaByCod(int id)
+    {
+        Query q = em.createNamedQuery("TipoTarea.findById").setParameter("id", id);
+        return (List<TipoTarea>) q.getResultList();
+    } 
     
 }

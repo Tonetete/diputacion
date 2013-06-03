@@ -26,5 +26,15 @@ public class GrupoRescateFacade extends AbstractFacade<GrupoRescate> {
     public GrupoRescateFacade() {
         super(GrupoRescate.class);
     }
+
+    public GrupoRescate findByNombre(String nombre) {
+        GrupoRescate res = (GrupoRescate) em.createNamedQuery("GrupoRescate.findByNombre").setParameter("nombre", nombre).getSingleResult();
+        return res;
+    }
+    
+    public GrupoRescate findByCodigo(int codigo) {
+        GrupoRescate res = (GrupoRescate) em.createNamedQuery("GrupoRescate.findByCodigo").setParameter("codigo", codigo).getSingleResult();
+        return res;
+    }
     
 }

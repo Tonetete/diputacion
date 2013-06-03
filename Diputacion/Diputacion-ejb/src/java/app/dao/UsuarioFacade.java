@@ -7,6 +7,7 @@ package app.dao;
 import app.entity.Diputacion;
 import app.entity.Roles;
 import app.entity.Usuario;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -62,6 +63,20 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     public void delete(Usuario u) {
         Query q = em.createQuery("DELETE FROM Usuario u WHERE u.dni = :dni").setParameter("dni", u.getDni());
         q.executeUpdate();
+    }
+
+    public List<Usuario> getUsuarioByDni(String dni)
+    {
+        Query q = em.createNamedQuery("Usuario.findByDni").setParameter("dni", dni);
+        return q.getResultList();
+    }
+    
+    public List<Usuario> getUsuarioByRolDip(Roles codigoRol, Diputacion codigoDip)
+    {
+         Query q = em.createQuery("SELECT u FROM Usuario u WHERE u.codigoRol = :codigoRol AND u.codigoDip = :codigoDip")
+                 .setParameter("codigoRol", codigoRol)
+                 .setParameter("codigoDip", codigoDip);
+        return q.getResultList();
     }
     
 }

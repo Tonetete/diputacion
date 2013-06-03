@@ -138,6 +138,7 @@ body {
   font-size: 13px;
   line-height: 18px;
   color: #555555;
+  /*width: 1500px;*/
   background-color: #ffffff;
   text-shadow:0 -1px 1px rgba(0, 0, 0, 0.2)
 }
@@ -2060,6 +2061,15 @@ img.mail, img.bell, img.user{
 }
 .icon2-terminal {
   background-position: -267px -390px;
+}
+.icon2-gruporescate {
+  background-position: -267px -269px;
+}
+.icon2-tareas {
+  background-position: -267px -151px;
+}
+.icon2-asig {
+  background-position: -28px -67px;
 }
 
 .icon2-linea {

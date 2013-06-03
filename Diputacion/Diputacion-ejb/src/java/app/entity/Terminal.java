@@ -5,10 +5,10 @@
 package app.entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,27 +36,23 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Terminal.findAll", query = "SELECT t FROM Terminal t"),
     @NamedQuery(name = "Terminal.findByCodigo", query = "SELECT t FROM Terminal t WHERE t.codigo = :codigo"),
     @NamedQuery(name = "Terminal.findByFechaAlta", query = "SELECT t FROM Terminal t WHERE t.fechaAlta = :fechaAlta"),
-    @NamedQuery(name = "Terminal.findByFechaBaja", query = "SELECT t FROM Terminal t WHERE t.fechaBaja = :fechaBaja"),
     @NamedQuery(name = "Terminal.findByMarca", query = "SELECT t FROM Terminal t WHERE t.marca = :marca"),
     @NamedQuery(name = "Terminal.findByModelo", query = "SELECT t FROM Terminal t WHERE t.modelo = :modelo"),
     @NamedQuery(name = "Terminal.findByConfiguracion", query = "SELECT t FROM Terminal t WHERE t.configuracion = :configuracion"),
-    @NamedQuery(name = "Terminal.findBySn", query = "SELECT t FROM Terminal t WHERE t.sn = :sn"),
-    @NamedQuery(name = "Terminal.findByNumeroInterno", query = "SELECT t FROM Terminal t WHERE t.numeroInterno = :numeroInterno"),
-    @NamedQuery(name = "Terminal.findByPedido", query = "SELECT t FROM Terminal t WHERE t.pedido = :pedido"),
-    @NamedQuery(name = "Terminal.findByProduct", query = "SELECT t FROM Terminal t WHERE t.product = :product")})
+    @NamedQuery(name = "Terminal.findBySn", query = "SELECT t FROM Terminal t WHERE t.sn = :sn")
+})
 public class Terminal implements Serializable {
+    @OneToMany(mappedBy = "codigoTerminal")
+    private Collection<Tarea> tareaCollection;
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id    
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "codigo")
     private Integer codigo;
     @Column(name = "fecha_alta")
     @Temporal(TemporalType.DATE)
     private Date fechaAlta;
-    @Column(name = "fecha_baja")
-    @Temporal(TemporalType.DATE)
-    private Date fechaBaja;
     @Size(max = 40)
     @Column(name = "marca")
     private String marca;
@@ -70,23 +66,6 @@ public class Terminal implements Serializable {
     @NotNull
     @Column(name = "sn")
     private long sn;
-    @Size(max = 40)
-    @Column(name = "numero_interno")
-    private String numeroInterno;
-    @Size(max = 400)
-    @Column(name = "pedido")
-    private String pedido;
-    @Size(max = 200)
-    @Column(name = "product")
-    private String product;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoTerminal")
-    private Collection<AsignacionFijo> asignacionFijoCollection;
-    @OneToMany(mappedBy = "codigoTerminal")
-    private Collection<Tarea> tareaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoTerminal")
-    private Collection<Rma> rmaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codigoTerminal")
-    private Collection<AsignacionMovil> asignacionMovilCollection;
 
     public Terminal() {
     }
@@ -108,6 +87,12 @@ public class Terminal implements Serializable {
         this.codigo = codigo;
     }
 
+    public String getFechaAltaStr(){ 
+        SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+        String f = formateador.format(fechaAlta);
+        return f;
+    }
+    
     public Date getFechaAlta() {
         return fechaAlta;
     }
@@ -116,13 +101,6 @@ public class Terminal implements Serializable {
         this.fechaAlta = fechaAlta;
     }
 
-    public Date getFechaBaja() {
-        return fechaBaja;
-    }
-
-    public void setFechaBaja(Date fechaBaja) {
-        this.fechaBaja = fechaBaja;
-    }
 
     public String getMarca() {
         return marca;
@@ -156,65 +134,6 @@ public class Terminal implements Serializable {
         this.sn = sn;
     }
 
-    public String getNumeroInterno() {
-        return numeroInterno;
-    }
-
-    public void setNumeroInterno(String numeroInterno) {
-        this.numeroInterno = numeroInterno;
-    }
-
-    public String getPedido() {
-        return pedido;
-    }
-
-    public void setPedido(String pedido) {
-        this.pedido = pedido;
-    }
-
-    public String getProduct() {
-        return product;
-    }
-
-    public void setProduct(String product) {
-        this.product = product;
-    }
-
-    @XmlTransient
-    public Collection<AsignacionFijo> getAsignacionFijoCollection() {
-        return asignacionFijoCollection;
-    }
-
-    public void setAsignacionFijoCollection(Collection<AsignacionFijo> asignacionFijoCollection) {
-        this.asignacionFijoCollection = asignacionFijoCollection;
-    }
-
-    @XmlTransient
-    public Collection<Tarea> getTareaCollection() {
-        return tareaCollection;
-    }
-
-    public void setTareaCollection(Collection<Tarea> tareaCollection) {
-        this.tareaCollection = tareaCollection;
-    }
-
-    @XmlTransient
-    public Collection<Rma> getRmaCollection() {
-        return rmaCollection;
-    }
-
-    public void setRmaCollection(Collection<Rma> rmaCollection) {
-        this.rmaCollection = rmaCollection;
-    }
-
-    @XmlTransient
-    public Collection<AsignacionMovil> getAsignacionMovilCollection() {
-        return asignacionMovilCollection;
-    }
-
-    public void setAsignacionMovilCollection(Collection<AsignacionMovil> asignacionMovilCollection) {
-        this.asignacionMovilCollection = asignacionMovilCollection;
-    }
 
     @Override
     public int hashCode() {
@@ -239,6 +158,15 @@ public class Terminal implements Serializable {
     @Override
     public String toString() {
         return "app.entity.Terminal[ codigo=" + codigo + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Tarea> getTareaCollection() {
+        return tareaCollection;
+    }
+
+    public void setTareaCollection(Collection<Tarea> tareaCollection) {
+        this.tareaCollection = tareaCollection;
     }
     
 }

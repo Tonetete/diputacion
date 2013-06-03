@@ -5,6 +5,7 @@
 package app.dao;
 
 import app.entity.Linea;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -48,11 +49,27 @@ public class LineaFacade extends AbstractFacade<Linea> {
         }
         return l;
     }
+    
+    public List<Linea> findNoAsig(){
+        try{
+        Query q = em.createQuery("SELECT l FROM Linea l WHERE l.codigo NOT IN (SELECT af.codigoNumero.codigo FROM AsignacionFijo af WHERE af.asignado = 'S') AND l.codigo NOT IN (SELECT am.codigoNumero.codigo FROM AsignacionMovil am WHERE am.asignado = 'S')");
+        return (List<Linea>)q.getResultList();
+        } catch(NoResultException e) {
+            return null;
+        }
+        
+    }
 
     public int getMaxCodigo() {
         Query q = em.createQuery("SELECT MAX(l.codigo) FROM Linea l");
         int max = (Integer)q.getSingleResult();
         return max++;
+    }
+
+    public List<Linea> getNumByCod(int codigo)
+    {
+        Query q = em.createNamedQuery("Linea.findByCodigo").setParameter("codigo", codigo);
+        return (List<Linea>) q.getResultList();
     }
 
 }

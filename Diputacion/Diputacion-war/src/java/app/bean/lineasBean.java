@@ -86,6 +86,11 @@ public class lineasBean {
         return listaLinea;
     }
     
+    public List<Linea> getListaLineasNoAsig(){
+        List<Linea> listaLinea = (List<Linea>)lineaFac.findNoAsig();
+        return listaLinea;
+    }
+    
     public void borrar()
     {
         Linea l = new Linea();

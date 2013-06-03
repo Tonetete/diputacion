@@ -7,14 +7,15 @@
                 <ul class="nav nav-tabs nav-stacked main-menu">
                         <li class="nav-header hidden-tablet">Main</li>
                         <li><a class="ajax-link" href="main.jsf"><i class="icon2-home"></i><span class="hidden-tablet"> Principal</span></a></li>
-                        <li><a class="ajax-link" href="lineas.jsf"><i class="icon2-linea"></i><span class="hidden-tablet"> Líneas</span></a></li>
-                        <li><a class="ajax-link" href="listmovil.jsf"><i class="icon2-terminal"></i><span class="hidden-tablet"> Terminales</span></a></li>
-                        <li><a class="ajax-link" href="chart.html"><i class="icon2-gastos"></i><span class="hidden-tablet"> Gestión de Gastos</span></a></li>
+                        <li><a class="ajax-link" href="gruporescate.jsf"><i class="icon2-gruporescate"></i><span class="hidden-tablet"> Grupo de Rescate</span></a></li>
+                        <li><a class="ajax-link" href="listarTerminales.jsf"><i class="icon2-asig"></i><span class="hidden-tablet"> Asignaciones Terminales</span></a></li>                                              
+                        <li><a class="ajax-link" href="facturacion.jsf"><i class="icon2-gastos"></i><span class="hidden-tablet"> Gestión de Gastos</span></a></li>
                         <c:if test="${rol == 'administrador'}">
+                             <li><a class="ajax-link" href="lineas.jsf"><i class="icon2-linea"></i><span class="hidden-tablet"> Líneas</span></a></li>
+                             <li><a class="ajax-link" href="terminales.jsf"><i class="icon2-terminal"></i><span class="hidden-tablet"> Terminales</span></a></li>
                              <li><a class="ajax-link" href="usuarios.jsf"><i class="icon2-user"></i><span class="hidden-tablet"> Gestión de Usuarios</span></a></li>
+                             <li><a class="ajax-link" href="tareas.jsf"><i class="icon2-tareas"></i><span class="hidden-tablet"> Tareas</span></a></li>                        
                         </c:if>
-                        <li><a class="ajax-link" href="gallery.html"><i class="icon-picture"></i><span class="hidden-tablet"> Gallery</span></a></li>                        
-                        
                 </ul>
             <label id="for-is-ajax" class="hidden-tablet" for="is-ajax">
                 <input id="is-ajax" checked="checked" type="checkbox"/> Ajax on menu

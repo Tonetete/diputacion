@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head> <title>Grupo de Rescate</title>
+        <ui:include src="res/header.html"   />
+    </h:head>
+    <h:body>
+        <ui:include src="res/header-menu.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"  />
+           <!-- left menu starts -->
+            <ui:include src="res/sidebar.xhtml"/>
+            <!-- left menu ends -->
+        <h3> Grupo de Rescate Actual: <h:outputText value="#{grupoRescateBean.grupoRescate}"/></h3> 
+        <br>
+              
+        </br>
+        <h:form>  
+          <h3>  Desea Cambiar tu Grupo de Rescate: 
+          <h:selectOneMenu id="selectGrupoRescate1" value="#{grupoRescateBean.codigoToUpdate}">
+              <f:selectItems value="#{grupoRescateBean.listaCodigo}" />   
+          </h:selectOneMenu>  
+          
+          <h:commandButton id="Cambiar" value="Cambiar" action="#{grupoRescateBean.updateGrupoRescate}"/>
+          </h3>
+        </h:form> 
+        <br>
+              
+        </br>
+        <h:form  rendered="#{grupoRescateBean.roluser lt 2}">     <!-- lt Menor que  --> <!-- gt Mayor que -->
+          
+          
+          <h:dataTable value="#{grupoRescateBean.listaGrupoRescate}" var="gruporescate" border="2"
+                     styleClass="table table-striped table-bordered bootstrap-datatable datatable">
+            <f:facet name="caption">Listado Grupo de Rescate</f:facet>
+            <h:column id="codigo">
+                <f:facet name="header">
+                    <h:outputText value="Codigo"/>
+                </f:facet>
+                <h:outputText value="#{gruporescate.codigo}"/>
+            </h:column>
+         
+            <h:column id="nombre">
+                <f:facet name="header">
+                    <h:outputText value="Nombre"/>
+                </f:facet>
+                <h:outputText value="#{gruporescate.nombre}"/>
+            </h:column>
+         
+            <h:column>
+              <f:facet name="header">
+                   <h:outputText value="Acciones"/>
+              </f:facet>
+              <h:commandLink value="Borrar" action="#{grupoRescateBean.deleteGrupoRescate}" immediate="true">
+                    <f:setPropertyActionListener target="#{grupoRescateBean.grToDelete}" value="#{gruporescate}"/>
+              </h:commandLink>
+            </h:column> 
+
+          </h:dataTable> 
+          <br>
+              
+          </br>
+          <h4>  Nuevo/Editar Grupo de Rescate: </h4>
+          <p/>
+           Codigo: <h:inputText id="codigogr" value="#{grupoRescateBean.newCodigo}"/>
+          <p/>
+           Nombre: <h:inputText id="nombregr" value="#{grupoRescateBean.newNombre}"/>
+          <p/>
+          <h:commandButton id="Crear" value="Enviar" action="#{grupoRescateBean.addGrupoRescate}"/>
+          <br>
+              
+          </br>
+            
+            
+          <h4>  Mensaje >>  <h:outputText value="#{grupoRescateBean.mensaje}"/> </h4>
+          
+        </h:form> 
+     
+        <ui:include src="res/footer.xhtml"/>    
+    </h:body>
+</html>
+

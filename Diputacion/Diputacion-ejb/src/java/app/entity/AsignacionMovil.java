@@ -6,6 +6,7 @@ package app.entity;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -102,6 +103,18 @@ public class AsignacionMovil implements Serializable {
 
     public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
+    }
+    
+    public String getFechaIniStr(){ 
+        SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+        String f = formateador.format(fechaAsignacion);
+        return f;
+    }
+    
+    public String getFechaFinStr(){ 
+        SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+        String f = formateador.format(fechaFin);
+        return f;
     }
 
     public Long getCodigo() {
