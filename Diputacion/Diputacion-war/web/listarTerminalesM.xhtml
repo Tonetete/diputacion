@@ -197,11 +197,11 @@
                                                                     <f:selectItem id="n" itemLabel="NO" itemValue="N"/>
                                                                 </h:selectOneRadio>                                                                
                                                                 <h4>Número de Teléfono: </h4><h:selectOneMenu class="validate[required]" id="numero-form" value="#{listaTerminales.codigoNumero}">
-                                                                    <f:selectItems var="l"  itemLabel="#{l.numero}" itemValue="#{l.codigo}" value="#{lineasBean.listaLineasNoAsig}" />
+                                                                    <f:selectItems var="l"  itemLabel="#{l.numero}" itemValue="#{l.codigo}" value="#{lineasBean.listaLineasMovil}" />
                                                                        </h:selectOneMenu> 
                                                                 <h4>Terminal: </h4><h:selectOneMenu class="validate[required]" id="terminal-form" value="#{listaTerminales.codigoTerminal}">
                                                                     <!--<f:ajax event="click" listener="#{terminalesBean.terminalesMovilAndAsig}" render="terminal-form"/>-->
-                                                                    <f:selectItems var="t"  itemLabel="#{t.marca} #{t.modelo}" itemValue="#{t.codigo}" value="#{terminalesBean.terminalesMovilAndAsig}" />
+                                                                    <f:selectItems var="t"  itemLabel="#{t.marca} #{t.modelo}" itemValue="#{t.codigo}" value="#{terminalesBean.terminalesMovil}" />
                                                                                    </h:selectOneMenu> 
                                                                 <h4>Perfil </h4><h:selectOneMenu class="validate[required]" id="perfil-form" value="#{listaTerminales.codigoPerfil}">
                                                                     <f:selectItems var="p"  itemLabel="#{p.descripcion}" itemValue="#{p.codigo}" value="#{perfilBean.listaPerfiles}" />

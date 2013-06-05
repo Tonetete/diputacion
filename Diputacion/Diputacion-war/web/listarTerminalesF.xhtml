@@ -194,20 +194,19 @@
                                                                     <f:selectItem id="y" itemLabel="SI" itemValue="S"/> 
                                                                     <f:selectItem id="n" itemLabel="NO" itemValue="N"/>
                                                                 </h:selectOneRadio>
-                                                                <!--<h:inputText id="codAsig-form" class="validate[required]" value="#{listaTerminalesF.codAsignado}"></h:inputText>-->
+                                                                
                                                                 <h4>Número de Teléfono: </h4><h:selectOneMenu class="validate[required]" id="numero-form" value="#{listaTerminalesF.codigoNumero}">
-                                                                    <f:selectItems var="l"  itemLabel="#{l.numero}" itemValue="#{l.codigo}" value="#{lineasBean.listaLineasNoAsig}" />
-                                                                       </h:selectOneMenu> 
-                                                                <!--<h:inputText id="coste-form" class="validate[required]" value="#{listaTerminalesF.coste}"></h:inputText>-->
-                                                                <!--<h4>Coste: </h4><h:inputText id="coste-form" class="validate[required]" value="#{listaTerminalesF.coste}"></h:inputText>-->
+                                                                    <f:selectItems var="l"  itemLabel="#{l.numero}" itemValue="#{l.codigo}" value="#{lineasBean.listaLineasFijo}" />
+                                                                       </h:selectOneMenu>                                                                 
+                                                               
                                                                 <h4>Terminal: </h4><h:selectOneMenu class="validate[required]" id="terminal-form" value="#{listaTerminalesF.codigoTerminal}">
-                                                                    <f:selectItems var="t"  itemLabel="#{t.marca} #{t.modelo}" itemValue="#{t.codigo}" value="#{terminalesBean.terminalesFijoAndAsig}" />
+                                                                    <f:selectItems var="t"  itemLabel="#{t.marca} #{t.modelo}" itemValue="#{t.codigo}" value="#{terminalesBean.terminalesFijo}" />
                                                                                    </h:selectOneMenu> 
-                                                                <h4>Categoría: </h4><h:selectOneMenu class="validate[required]" id="categoria-form" value="#{listaTerminalesF.codigoCategoria}">
+                                                               <h4>Categoría: </h4><h:selectOneMenu class="validate[required]" id="categoria-form" value="#{listaTerminalesF.codigoCategoria}">
                                                                                         <f:selectItems var="c"  itemLabel="#{c.descripcion}" itemValue="#{c.codigo}" value="#{categoriaBean.listaCategorias}" />
                                                                                    </h:selectOneMenu> 
                                                                 <h4>Fecha asignación: </h4><h:inputText class="validate[required]" id="fechaini-form" value="#{listaTerminalesF.fechaAsig}"></h:inputText>
-                                                                <h4>Fecha finalización: </h4><h:inputText class="validate[required]" id="fechafin-form" value="#{listaTerminalesF.fechaFin}"></h:inputText>                            
+                                                                <h4>Fecha finalización: </h4><h:inputText class="validate[required]" id="fechafin-form" value="#{listaTerminalesF.fechaFin}"></h:inputText>
                                                             </fieldset>   
                                                         </div>
                                                         <div class="modal-footer">

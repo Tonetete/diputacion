@@ -244,7 +244,10 @@ public class anadirTarea
         System.out.println(id_categoria);
         
         //Para el campo codigo_numero
-        Linea l = (Linea) lineaFaca.find(numero);
+        Linea l;
+        List<Linea> lin = (List<Linea>)lineaFaca.findNoAsigMovil();
+        l = (Linea) lineaFaca.find(lin.get(0).getCodigo());
+        
         t.setCodigoNumero(l);
         System.out.println(numero);
         

@@ -48,6 +48,7 @@ public class listaTerminales
     @EJB
     private UsuarioFacade usuarioFaca;
     
+    
     List<AsignacionMovil> listaAsigMovil;
     List<AsignacionMovil> listaAsigMovil_2;
     
@@ -234,41 +235,51 @@ public class listaTerminales
      */
     public void modificar()
     {
-        AsignacionMovil am = new AsignacionMovil();
-        
-        am.setAsignado(codigoAsignado);
-        
-        am.setCodigo(codigo);
-        
-        Linea l = lineaFaca.find(codigoNumero);
-        am.setCodigoNumero(l);
-        
-        Perfil p = perfilFaca.find(codigoPerfil);
-        am.setCodigoPerfil(p);
-        
-        Terminal t = terminalFaca.find(codigoTerminal);
-        am.setCodigoTerminal(t);
-        
-        am.setCoste(coste);
-        
-        Usuario u = usuarioFaca.find(dni);
-        am.setDni(u);
-        
-        am.setFechaAsignacion(fechaIniDate);
-        
-        am.setFechaFin(fechaFinDate);
-        
-        AsigFaca.edit(am);
-        
         RequestContext reqCtx = RequestContext.getCurrentInstance();
-        reqCtx.addCallbackParam("terminal", am.getCodigoTerminal().getMarca()+" "+am.getCodigoTerminal().getModelo());
-        reqCtx.addCallbackParam("asignado", String.valueOf(am.getAsignado()));        
-        reqCtx.addCallbackParam("numero", am.getCodigoNumero().getNumero());
-        reqCtx.addCallbackParam("usuario", am.getDni().getDni());
-        reqCtx.addCallbackParam("fechaini", am.getFechaIniStr());
-        reqCtx.addCallbackParam("fechafin", am.getFechaFinStr()); 
-        reqCtx.addCallbackParam("perfil", am.getCodigoPerfil().getDescripcion()); 
-        reqCtx.addCallbackParam("idperfil", am.getCodigoPerfil().getCodigo()); 
-        reqCtx.addCallbackParam("idterminal", am.getCodigoTerminal().getCodigo()); 
+        AsignacionMovil a = AsigFaca.comprobarAsignacionLineaNumero(codigoNumero, codigoTerminal, dni);
+        
+        if(a!=null){
+            reqCtx.addCallbackParam("error", "asignado");
+        }
+        
+        else{
+        
+            AsignacionMovil am = new AsignacionMovil();
+
+            am.setAsignado(codigoAsignado);
+
+            am.setCodigo(codigo);
+
+            Linea l = lineaFaca.find(codigoNumero);
+            am.setCodigoNumero(l);
+
+            Perfil p = perfilFaca.find(codigoPerfil);
+            am.setCodigoPerfil(p);
+
+            Terminal t = terminalFaca.find(codigoTerminal);
+            am.setCodigoTerminal(t);
+
+            am.setCoste(coste);
+
+            Usuario u = usuarioFaca.find(dni);
+            am.setDni(u);
+
+            am.setFechaAsignacion(fechaIniDate);
+
+            am.setFechaFin(fechaFinDate);
+
+            AsigFaca.edit(am);
+
+
+            reqCtx.addCallbackParam("terminal", am.getCodigoTerminal().getMarca()+" "+am.getCodigoTerminal().getModelo());
+            reqCtx.addCallbackParam("asignado", String.valueOf(am.getAsignado()));        
+            reqCtx.addCallbackParam("numero", am.getCodigoNumero().getNumero());
+            reqCtx.addCallbackParam("usuario", am.getDni().getDni());
+            reqCtx.addCallbackParam("fechaini", am.getFechaIniStr());
+            reqCtx.addCallbackParam("fechafin", am.getFechaFinStr()); 
+            reqCtx.addCallbackParam("perfil", am.getCodigoPerfil().getDescripcion()); 
+            reqCtx.addCallbackParam("idperfil", am.getCodigoPerfil().getCodigo()); 
+            reqCtx.addCallbackParam("idterminal", am.getCodigoTerminal().getCodigo()); 
+        }
     }
 }

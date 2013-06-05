@@ -10,6 +10,10 @@ function checkCRUD(xhr, status, args){
        
         if(status === "success"){
            if(action==="edit"){
+               if(args.error === "asignado"){
+                 alert("La línea o número ya ha sido asignado a otro usuario");  
+               }
+               else{
                 fila_edit.siblings('.fechaini').text(args.fechaini);
                 fila_edit.siblings('.fechafin').text(args.fechafin);
                 fila_edit.siblings('.terminal').text(args.terminal);
@@ -19,6 +23,7 @@ function checkCRUD(xhr, status, args){
                 fila_edit.siblings('.categoria').text(args.categoria);
                 fila_edit.siblings('.idCategoria').text(args.idcategoria);
                 fila_edit.siblings('.idTerminal').text(args.idterminal);
+               }
            }
         }
         else if(status === "error" || status==="parseerror"){
@@ -45,9 +50,10 @@ $(document).ready(function() {
         var asignado = $(this).parent().siblings('.asignado').text();         
         if(asignado==='S'){
             $("input:radio[name='form-asig-fijo:asignado-form'][value='S']").attr('checked',true);
-            $("select[name='form-asig-fijo:numero-form']").append('<option value="'+$(this).parent().siblings(".numero").find(".idlinea").text()+'" selected="selected">'+$(this).parent().siblings(".numero").find(".lineanum").text()+'</option>');
-            $("select[name='form-asig-fijo:terminal-form']").append('<option value="'+$(this).parent().siblings(".terminal").find(".idterminal").text()+'" selected="selected">'+$(this).parent().siblings(".terminal").find(".terminalnom").text()+'</option>');
-            
+//            $("select[name='form-asig-fijo:numero-form']").append('<option value="'+$(this).parent().siblings(".numero").find(".idlinea").text()+'">'+$(this).parent().siblings(".numero").find(".lineanum").text()+'</option>').attr('checked', true);
+//            $("select[name='form-asig-fijo:terminal-form']").append('<option value="'+$(this).parent().siblings(".terminal").find(".idterminal").text()+'">'+$(this).parent().siblings(".terminal").find(".terminalnom").text()+'</option>').attr('checked', true);
+            $("select[name='form-asig-fijo:numero-form']").val($(this).parent().siblings(".numero").find(".idlinea").text());
+            $("select[name='form-asig-fijo:terminal-form']").val($(this).parent().siblings(".terminal").find(".idterminal").text());
         }
         else{
             $("input:radio[name='form-asig-fijo:asignado-form'][value='N']").attr('checked',true);

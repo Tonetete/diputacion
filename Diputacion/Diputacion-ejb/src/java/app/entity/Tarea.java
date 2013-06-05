@@ -5,6 +5,7 @@
 package app.entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -99,6 +100,12 @@ public class Tarea implements Serializable {
     public void setDni(String dni) {
         this.dni = dni;
     }
+    public String getFechaFact(){ 
+        SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+        String f = formateador.format(fechaEmision);
+        return f;
+    }
+    
 
     public Date getFechaEmision() {
         return fechaEmision;

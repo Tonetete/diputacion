@@ -68,6 +68,37 @@ public class TerminalFacade extends AbstractFacade<Terminal> {
         
     }
     
+    public List<Terminal> findByMovil(){
+        List<Terminal> lista = new ArrayList<Terminal>();
+        try{
+        Query q1 = em.createQuery("SELECT t FROM Terminal t WHERE t.configuracion = 'MOVIL'");
+//        Query q2 = em.createQuery("SELECT t FROM Terminal t WHERE t.configuracion = 'MOVIL' AND t.codigo <> (SELECT a.codigoTerminal.codigo FROM AsignacionMovil a WHERE a.codigo = :codigo)")
+//                .setParameter("codigo", codigo);
+        lista.addAll((List<Terminal>)q1.getResultList());
+//        lista.addAll((List<Terminal>)q2.getResultList());
+        return lista;
+        //return (List<Terminal>)q.getResultList();
+        } catch(NoResultException e) {
+            return null;
+        }
+    }
+        
+    public List<Terminal> findByFijo(){
+        List<Terminal> lista = new ArrayList<Terminal>();
+        try{
+        Query q1 = em.createQuery("SELECT t FROM Terminal t WHERE t.configuracion = 'FIJO'");
+//        Query q2 = em.createQuery("SELECT t FROM Terminal t WHERE t.configuracion = 'MOVIL' AND t.codigo <> (SELECT a.codigoTerminal.codigo FROM AsignacionMovil a WHERE a.codigo = :codigo)")
+//                .setParameter("codigo", codigo);
+        lista.addAll((List<Terminal>)q1.getResultList());
+//        lista.addAll((List<Terminal>)q2.getResultList());
+        return lista;
+        //return (List<Terminal>)q.getResultList();
+        } catch(NoResultException e) {
+            return null;
+        }
+        
+    }
+    
     public Terminal findbysn(int sn){
         try{
         Query q = em.createQuery("SELECT t FROM Terminal t WHERE t.sn = :sn").setParameter("sn", sn);

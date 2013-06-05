@@ -91,6 +91,15 @@ public class lineasBean {
         return listaLinea;
     }
     
+    public List<Linea> getListaLineasFijo(){
+        List<Linea> listaLinea = (List<Linea>)lineaFac.lineasFijo();
+        return listaLinea;
+    }
+    public List<Linea> getListaLineasMovil(){
+        List<Linea> listaLinea = (List<Linea>)lineaFac.lineasMovil();
+        return listaLinea;
+    }
+    
     public void borrar()
     {
         Linea l = new Linea();

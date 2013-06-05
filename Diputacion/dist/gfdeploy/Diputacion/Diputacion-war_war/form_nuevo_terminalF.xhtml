@@ -54,25 +54,25 @@
                         <h:form>
                             <h2>Escoge el terminal que quieras</h2>
                             Tipo tarea:
-                            <h:selectOneMenu value="#{anadirTarea.id_TipoTarea}">
-                                <f:selectItems value="#{anadirTarea.listaTipoTarea}" var="p" itemLabel="#{p.nombre}" itemValue="#{p.id}"/>
+                            <h:selectOneMenu value="#{anadirTareaF.id_TipoTarea}">
+                                <f:selectItems value="#{anadirTareaF.listaTipoTarea}" var="p" itemLabel="#{p.nombre}" itemValue="#{p.id}"/>
                             </h:selectOneMenu><br/>
                             Tipo de categoría:
-                            <h:selectOneMenu value="#{anadirTarea.id_Categoria}">
-                                <f:selectItems value="#{anadirTarea.listaCategorias}" var="c" itemLabel="#{c.descripcion}" itemValue="#{c.codigo}"/>
+                            <h:selectOneMenu value="#{anadirTareaF.id_Categoria}">
+                                <f:selectItems value="#{anadirTareaF.listaCategorias}" var="c" itemLabel="#{c.descripcion}" itemValue="#{c.codigo}"/>
                             </h:selectOneMenu><br/>
-                            Número de teléfono:
-                            <h:selectOneMenu value="#{anadirTarea.id_Numero}" disabled="true">
-                                <f:selectItems value="#{anadirTarea.listaLineas}" var="l" itemLabel="#{l.numero}" itemValue="#{l.codigo}"/>
-                            </h:selectOneMenu><br/>
+<!--                            Número de teléfono:
+                            <h:selectOneMenu value="#{anadirTareaF.id_Numero}" disabled="true">
+                                <f:selectItems value="#{anadirTareaF.listaLineas}" var="l" itemLabel="#{l.numero}" itemValue="#{l.codigo}"/>
+                            </h:selectOneMenu><br/>-->
                             Tipo de teléfono:
-                            <h:selectOneMenu value="#{anadirTarea.id_Telefono}">
-                                <f:selectItems value="#{anadirTarea.listaTerminal}" var="t" itemLabel="#{t.marca} #{t.modelo}" itemValue="#{t.codigo}"/>
+                            <h:selectOneMenu value="#{anadirTareaF.id_Telefono}">
+                                <f:selectItems value="#{terminalesBean.terminalesFijoAndAsig}" var="t" itemLabel="#{t.marca} #{t.modelo}" itemValue="#{t.codigo}"/>
                             </h:selectOneMenu><br/>
                             Validación:
                             <h:inputText id="validado" value="Sin validar" disabled="true"></h:inputText><br/>
 
-                            <h:commandButton action="#{anadirTarea.insertarTarea()}" value="ENVIAR" class="btn btn-success edit" />
+                            <h:commandButton action="#{anadirTareaF.insertarTarea()}" value="ENVIAR" class="btn btn-success edit" />
                         </h:form>
 
                         <!-- Fin formulario -->

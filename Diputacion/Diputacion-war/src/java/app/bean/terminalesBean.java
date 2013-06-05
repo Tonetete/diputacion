@@ -115,6 +115,16 @@ public class terminalesBean {
         return this.terminales;
     }
     
+    public List<Terminal> getTerminalesMovil(){
+        terminales = (List<Terminal>)termFac.findByMovil();
+        return this.terminales;
+    }
+    
+    public List<Terminal> getTerminalesFijo(){
+        terminales = (List<Terminal>)termFac.findByFijo();
+        return this.terminales;
+    }
+    
     public void setTerminales(List<Terminal> terminales){
         this.terminales = terminales;
     }

@@ -61,17 +61,17 @@
                             <h:selectOneMenu value="#{anadirTarea.id_Tarifa}">
                                 <f:selectItems value="#{anadirTarea.listaPerfiles}" var="p" itemLabel="#{p.descripcion}" itemValue="#{p.codigo}"/>
                             </h:selectOneMenu><br/>
-                            Tipo de categoría:
+<!--                            Tipo de categoría:
                             <h:selectOneMenu value="#{anadirTarea.id_Categoria}">
                                 <f:selectItems value="#{anadirTarea.listaCategorias}" var="c" itemLabel="#{c.descripcion}" itemValue="#{c.codigo}"/>
-                            </h:selectOneMenu><br/>
-                            Número de teléfono:
+                            </h:selectOneMenu><br/>-->
+<!--                            Número de teléfono:
                             <h:selectOneMenu value="#{anadirTarea.id_Numero}" disabled="true">
-                                <f:selectItems value="#{anadirTarea.listaLineas}" var="l" itemLabel="#{l.numero}" itemValue="#{l.codigo}"/>
-                            </h:selectOneMenu><br/>
+                                <f:selectItems value="#{lineasBean.listaLineasMovil}" var="l" itemLabel="#{l.numero}" itemValue="#{l.codigo}"/>
+                            </h:selectOneMenu><br/>-->
                             Tipo de teléfono:
                             <h:selectOneMenu value="#{anadirTarea.id_Telefono}">
-                                <f:selectItems value="#{anadirTarea.listaTerminal}" var="t" itemLabel="#{t.marca} #{t.modelo}" itemValue="#{t.codigo}"/>
+                                <f:selectItems value="#{terminalesBean.terminalesMovilAndAsig}" var="t" itemLabel="#{t.marca} #{t.modelo}" itemValue="#{t.codigo}"/>
                             </h:selectOneMenu><br/>
                             Validación:
                             <h:inputText id="validado" value="Sin validar" disabled="true"></h:inputText><br/>

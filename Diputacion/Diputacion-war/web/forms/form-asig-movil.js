@@ -10,6 +10,10 @@ function checkCRUD(xhr, status, args){
        
         if(status === "success"){
            if(action==="edit"){
+               if(args.error === "asignado"){
+                   alert("La línea o número ya ha sido asignado a otro usuario");  
+               }
+               else{
                 fila_edit.siblings('.fechaini').text(args.fechaini);
                 fila_edit.siblings('.fechafin').text(args.fechafin);
                 fila_edit.siblings('.terminal').text(args.terminal);
@@ -19,6 +23,7 @@ function checkCRUD(xhr, status, args){
                 fila_edit.siblings('.perfil').text(args.perfil);
                 fila_edit.siblings('.idPerfil').text(args.idperfil);
                 fila_edit.siblings('.idTerminal').text(args.idterminal);
+               }
            }
         }
         else if(status === "error" || status==="parseerror"){
@@ -48,8 +53,8 @@ $(document).ready(function() {
             $("input:radio[name='form-asig-movil:asignado-form'][value='S']").attr('checked',true);
             // Añadimos los valores del terminal y la linea a los selects si está asignado
             
-            $("select[name='form-asig-movil:numero-form']").append('<option value="'+$(this).parent().siblings(".numero").find(".idlinea").text()+'" selected="selected">'+$(this).parent().siblings(".numero").find(".lineanum").text()+'</option>');
-            $("select[name='form-asig-movil:terminal-form']").append('<option value="'+$(this).parent().siblings(".terminal").find(".idterminal").text()+'" selected="selected">'+$(this).parent().siblings(".terminal").find(".terminalnom").text()+'</option>');
+            $("select[name='form-asig-movil:numero-form']").val($(this).parent().siblings(".numero").find(".idlinea").text());
+            $("select[name='form-asig-movil:terminal-form']").val($(this).parent().siblings(".terminal").find(".idterminal").text());
             
         }
         else{

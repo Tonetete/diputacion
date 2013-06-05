@@ -6,8 +6,10 @@ package app.bean;
 
 
 import app.dao.AsignacionFijoFacade;
+import app.dao.AsignacionMovilFacade;
 import app.dao.TareaFacade;
 import app.entity.AsignacionFijo;
+import app.entity.AsignacionMovil;
 import app.entity.Tarea;
 import app.entity.Usuario;
 import java.text.DateFormat;
@@ -41,6 +43,8 @@ public class listTareasBean {
     TareaFacade tF;
     @EJB
     AsignacionFijoFacade asF;
+    @EJB
+    AsignacionMovilFacade asM;
     
     Tarea tarea;
     Usuario user;
@@ -94,19 +98,27 @@ public class listTareasBean {
     public String add()
     {
         Tarea t = tF.findByIdTarea(id);
-        AsignacionFijo as = crearAsignacion(t);
-        asF.create(as);
-        borrar();
+        if(t.getTipoTarea().getNombre().equals("SOLICITAR TERMINAL FIJO")){
+          AsignacionFijo as = crearAsignacionFijo(t);
+          asF.create(as);
+          borrar();   
+        }
+        else if(t.getTipoTarea().getNombre().equals("SOLICITAR TERMINAL MOVIL")){
+          AsignacionMovil am = crearAsignacionMovil(t);
+          asM.create(am);
+          borrar();   
+        }
+        
         
         return null;
     }
    // @PostConstruct
-    public AsignacionFijo crearAsignacion(Tarea t)
+    public AsignacionFijo crearAsignacionFijo(Tarea t)
     {
         AsignacionFijo as = new AsignacionFijo();
         
-        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-        String strFecha = "2015-11-25";
+        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");        
+        String strFecha = t.getFechaFact();
         Date fecha = null;
         try {        
             fecha = formatoDelTexto.parse(strFecha);
@@ -129,6 +141,36 @@ public class listTareasBean {
         
         as.setCodigo(Long.parseLong(String.valueOf(asF.findAll().size() + 1))); //identificador
         return as;
+    }
+    
+    public AsignacionMovil crearAsignacionMovil(Tarea t)
+    {
+        AsignacionMovil am = new AsignacionMovil();
+        
+        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");        
+        String strFecha = t.getFechaFact();
+        Date fecha = null;
+        try {        
+            fecha = formatoDelTexto.parse(strFecha);
+        } catch (ParseException ex) {
+            Logger.getLogger(listTareasBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
+        
+        System.out.println(t.getFechaEmision());
+        am.setFechaAsignacion(t.getFechaEmision());
+        am.setFechaFin(fecha);
+        am.setDni(t.getDniTareaAsignado());
+        am.setCodigoNumero(t.getCodigoNumero());
+        am.setCodigoTerminal(t.getCodigoTerminal());
+        am.setCodigoPerfil(t.getCodigoPerfil());
+        am.setAsignado('S');
+        
+        am.setCoste(null);
+        
+        am.setCodigo(Long.parseLong(String.valueOf(asF.findAll().size() + 1))); //identificador
+        return am;
     }
     
     //-------------

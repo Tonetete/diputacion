@@ -50,9 +50,48 @@ public class LineaFacade extends AbstractFacade<Linea> {
         return l;
     }
     
+    public List<Linea> findNoAsigFijo(){
+        try{
+        Query q = em.createQuery("SELECT l FROM Linea l WHERE l.codigo NOT IN (SELECT af.codigoNumero.codigo FROM AsignacionFijo af WHERE af.asignado = 'S') AND l.numero LIKE '9%'");
+        return (List<Linea>)q.getResultList();
+        } catch(NoResultException e) {
+            return null;
+        }
+        
+    }
+    
+    public List<Linea> findNoAsigMovil(){
+        try{
+        Query q = em.createQuery("SELECT l FROM Linea l WHERE l.codigo NOT IN  (SELECT am.codigoNumero.codigo FROM AsignacionMovil am WHERE am.asignado = 'S') AND l.numero LIKE '6%'");
+        return (List<Linea>)q.getResultList();
+        } catch(NoResultException e) {
+            return null;
+        }
+        
+    }
+    
     public List<Linea> findNoAsig(){
         try{
-        Query q = em.createQuery("SELECT l FROM Linea l WHERE l.codigo NOT IN (SELECT af.codigoNumero.codigo FROM AsignacionFijo af WHERE af.asignado = 'S') AND l.codigo NOT IN (SELECT am.codigoNumero.codigo FROM AsignacionMovil am WHERE am.asignado = 'S')");
+        Query q = em.createQuery("SELECT l FROM Linea l WHERE l.codigo NOT IN  (SELECT am.codigoNumero.codigo FROM AsignacionMovil am WHERE am.asignado = 'S') AND l.codigo NOT IN (SELECT af.codigoNumero.codigo FROM AsignacionFijo af WHERE af.asignado = 'S')");
+        return (List<Linea>)q.getResultList();
+        } catch(NoResultException e) {
+            return null;
+        }
+        
+    }
+    
+    public List<Linea> lineasFijo(){
+        try{
+        Query q = em.createQuery("SELECT l FROM Linea l WHERE l.numero LIKE '9%' ");
+        return (List<Linea>)q.getResultList();
+        } catch(NoResultException e) {
+            return null;
+        }
+        
+    }
+    public List<Linea> lineasMovil(){
+        try{
+        Query q = em.createQuery("SELECT l FROM Linea l WHERE l.numero LIKE '6%' ");
         return (List<Linea>)q.getResultList();
         } catch(NoResultException e) {
             return null;
